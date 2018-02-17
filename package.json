@@ -1,7 +1,7 @@
 {
     "name": "zditm-graphql",
-    "version": "0.1.0",
-    "description": "GraphQL Proxy for Zditm API",
+    "version": "1.0.0",
+    "description": "GraphQL Proxy for ZDITM API",
     "license": "MIT",
     "scripts": {
         "start": "dotenv -- node index.js",
