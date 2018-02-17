@@ -1,4 +1,5 @@
 # zditm-graphql
+<<<<<<< HEAD
 
 ## Description
 
@@ -36,3 +37,6 @@ Environments are located in file `.env`.
 ## License
 
 Zditm-graphql is [MIT licensed](LICENSE).
+=======
+GraphQL Proxy for Zditm API
+>>>>>>> 1b37fb8f51dd6c012de83b9b3bb6628b334cd25b
