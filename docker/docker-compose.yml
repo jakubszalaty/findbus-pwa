@@ -1,0 +1,31 @@
+version: "3"
+services:
+    graphql-sever:
+        command: yarn start:prod
+        deploy:
+            labels:
+                - 'traefik.backend.loadbalancer.sticky=true'
+                - 'traefik.docker.network=proxy'
+                - 'traefik.enable=true'
+                - 'traefik.frontend.passHostHeader=true'
+                - 'traefik.api.frontend.rule=HostRegexp:zditm-graphql.{domain:[a-z0-9-.]+}'
+                - 'traefik.api.port=9000'
+                - 'traefik.ws.frontend.rule=HostRegexp:ws-zditm-graphql.{domain:[a-z0-9-.]+}'
+                - 'traefik.ws.port=9001'
+            # tymczasowo
+            # placement:
+                # constraints: [node.role == worker]
+            replicas: 1
+            resources:
+                limits:
+                    cpus: '0.5'
+                    memory: 500M
+        image: im-node-server:latest
+        networks:
+            - proxy
+        volumes:
+            - ../:/app
+networks:
+    proxy:
+        external:
+            name: proxy
