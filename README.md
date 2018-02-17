@@ -1,6 +1,8 @@
+# zditm-graphql
+
 ## Description
 
-Starter for a Nest GraphQL Server w/ TypeScript
+GraphQL Proxy for Zditm API
 
 ## Installation
 
@@ -33,5 +35,4 @@ Environments are located in file `.env`.
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
-
+Zditm-graphql is [MIT licensed](LICENSE).
