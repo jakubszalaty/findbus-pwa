@@ -7,12 +7,12 @@ import { importSchema } from 'graphql-import'
 import { AppController } from './app.controller'
 
 import { SubscriptionsModule } from './subscription/subscription.module'
-import { HelloResolver } from './hello/hello.resolver'
+import { ZditmResolver } from './zditm/zditm.resolver'
 
 @Module({
     imports: [SubscriptionsModule.forRoot(), GraphQLModule],
     controllers: [AppController],
-    components: [HelloResolver],
+    components: [ZditmResolver],
 })
 export class ApplicationModule implements NestModule {
     constructor(

@@ -1,7 +1,43 @@
-type helloPayload {
-    msg: String
+
+"Contains all information about specific vehicle"
+type Vehicle {
+    gmvid: Int
+    id: Int
+    line: String
+    squad: String
+    lineType: String
+    vehicleId: String
+    route: String
+    from: String
+    to: String
+    lat: String
+    lnt: String
+    speed: String
+    timeString: String
+    timeNumber: Int
+    icon: String
+}
+
+"Input for search verhicle"
+input VehicleWhereInput {
+    gmvid: Int
+    id: Int
+    line: String
+    squad: String
+    lineType: String
+    vehicleId: String
+    route: String
+    from: String
+    to: String
+    lat: String
+    lnt: String
+    speed: String
+    timeString: String
+    timeNumber: Int
+    icon: String
 }
 
 type Query {
-    hello: helloPayload
+    "Return active vehicles"
+    vehicles(where: VehicleWhereInput): [Vehicle]
 }
