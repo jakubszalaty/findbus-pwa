@@ -1,3 +1,17 @@
+type Geometry {
+    type: String
+    coordinates: [[Float]]
+}
+
+type Feature {
+    type: String
+    geometry: Geometry
+}
+
+type RouteCords {
+    type: String
+    features: [Feature]
+}
 
 "Contains all information about specific vehicle"
 type Vehicle {
@@ -8,6 +22,7 @@ type Vehicle {
     lineType: String
     vehicleId: String
     route: String
+    routeCords: RouteCords
     from: String
     to: String
     lat: String
@@ -18,8 +33,8 @@ type Vehicle {
     icon: String
 }
 
-"Input for search verhicle"
-input VehicleWhereInput {
+"Input for search verhicles"
+input VehiclesWhereInput {
     gmvid: Int
     id: Int
     line: String
@@ -37,7 +52,12 @@ input VehicleWhereInput {
     icon: String
 }
 
+input VehicleWhereInput {
+    id: Int!
+}
+
 type Query {
     "Return active vehicles"
-    vehicles(where: VehicleWhereInput): [Vehicle]
+    vehicles(where: VehiclesWhereInput): [Vehicle]
+    vehicle(where: VehicleWhereInput!): Vehicle
 }

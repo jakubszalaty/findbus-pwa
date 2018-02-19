@@ -2,6 +2,7 @@
 
 export interface Query {
   vehicles?: Vehicle[] | null; /* Return active vehicles */
+  vehicle?: Vehicle | null; 
 }
 /* Contains all information about specific vehicle */
 export interface Vehicle {
@@ -12,6 +13,7 @@ export interface Vehicle {
   lineType?: string | null; 
   vehicleId?: string | null; 
   route?: string | null; 
+  routeCords?: RouteCords | null; 
   from?: string | null; 
   to?: string | null; 
   lat?: string | null; 
@@ -21,8 +23,23 @@ export interface Vehicle {
   timeNumber?: number | null; 
   icon?: string | null; 
 }
-/* Input for search verhicle */
-export interface VehicleWhereInput {
+
+export interface RouteCords {
+  type?: string | null; 
+  features?: Feature[] | null; 
+}
+
+export interface Feature {
+  type?: string | null; 
+  geometry?: Geometry | null; 
+}
+
+export interface Geometry {
+  type?: string | null; 
+  coordinates?: number[] | null; 
+}
+/* Input for search verhicles */
+export interface VehiclesWhereInput {
   gmvid?: number | null; 
   id?: number | null; 
   line?: string | null; 
@@ -39,6 +56,13 @@ export interface VehicleWhereInput {
   timeNumber?: number | null; 
   icon?: string | null; 
 }
+
+export interface VehicleWhereInput {
+  id: number; 
+}
 export interface VehiclesQueryArgs {
-  where?: VehicleWhereInput | null; 
+  where?: VehiclesWhereInput | null; 
+}
+export interface VehicleQueryArgs {
+  where: VehicleWhereInput; 
 }

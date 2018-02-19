@@ -1,14 +1,14 @@
-import { Resolver, Query } from '@nestjs/graphql'
+import { Resolver, ResolveProperty, Query } from '@nestjs/graphql'
 
 import fetch from 'node-fetch'
 import * as R from 'ramda'
 import { VehicleRaw } from '../typings/type'
 import { VehicleWhereInput, Vehicle } from '../typings/schema'
 
-@Resolver('Zditm')
+@Resolver('Vehicle')
 export class ZditmResolver {
-    @Query()
-    async vehicles(root, { where }: { where: VehicleWhereInput }, ctx, info) {
+    @Query('vehicles')
+    async getVehicles(root, { where }: { where: VehicleWhereInput }, ctx, info) {
         // const stops = await fetch('http://www.zditm.szczecin.pl/json/slupki.inc.php').then(v => v.json())
         const keys = [
             'gmvid', // gmvid
@@ -27,12 +27,15 @@ export class ZditmResolver {
             'timeNumber', // punktualnosc2
             'icon', // ikonka
         ]
+
+        // TODO: Create and move to VehicleService
         const decodeTime = R.converge(R.assoc, [
             R.always('timeNumber'),
             R.pipe(R.prop('timeNumber'), R.replace('&minus;', '-'), v => Number(v)),
             R.identity,
         ])
-        const normalizeKeys = R.map(R.pipe(R.values, R.zipObj(keys), decodeTime))
+        const convertId = R.converge(R.assoc, [R.always('id'), R.pipe(R.prop('id'), v => Number(v)), R.identity])
+        const normalizeKeys = R.map(R.pipe(R.values, R.zipObj(keys), decodeTime, convertId))
         const whereEq = R.converge(R.eqProps, [R.keys, R.identity]) as any
 
         const filterKey = R.keys(where).length ? whereEq(where) : R.always(true)
@@ -44,5 +47,17 @@ export class ZditmResolver {
         const resolveData = R.pipe<VehicleRaw[], Vehicle[], Vehicle[]>(normalizeKeys, R.filter(filterKey))
 
         return resolveData(vehicleRaw)
+    }
+
+    @Query('vehicle')
+    async getVehicle(root, args, ctx, info) {
+        const vehicles = await this.getVehicles(root, args, ctx, info)
+        return R.head(vehicles)
+    }
+
+    @ResolveProperty('routeCords')
+    async getRouteCords({ gmvid }) {
+        // TODO: Create and move to VehicleService
+        return fetch(`http://www.zditm.szczecin.pl/json/trasy.inc.php?gmvid=${gmvid}`).then(v => v.json())
     }
 }
