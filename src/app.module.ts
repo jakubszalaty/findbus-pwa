@@ -8,12 +8,12 @@ import { importSchema } from 'graphql-import'
 import { AppController } from './app.controller'
 
 import { SubscriptionsModule } from './subscription/subscription.module'
-import { ZditmResolver } from './zditm/zditm.resolver'
+import { VehicleResolver } from './vehicle/vehicle.resolver'
 
 @Module({
     imports: [SubscriptionsModule.forRoot(), GraphQLModule],
     controllers: [AppController],
-    components: [ZditmResolver],
+    components: [VehicleResolver],
 })
 export class ApplicationModule implements NestModule {
     constructor(

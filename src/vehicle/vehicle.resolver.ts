@@ -6,7 +6,7 @@ import { VehicleRaw } from '../typings/type'
 import { VehicleWhereInput, Vehicle } from '../typings/schema'
 
 @Resolver('Vehicle')
-export class ZditmResolver {
+export class VehicleResolver {
     @Query('vehicles')
     async getVehicles(root, { where }: { where: VehicleWhereInput }, ctx, info) {
         // const stops = await fetch('http://www.zditm.szczecin.pl/json/slupki.inc.php').then(v => v.json())
