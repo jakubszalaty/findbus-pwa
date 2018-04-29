@@ -13,6 +13,6 @@
         "outDir": "./dist",
         "lib": ["es2017", "dom", "esnext.asynciterable"]
     },
-    "include": ["src/**/*"],
-    "exclude": ["node_modules", "**/*.spec.ts"]
+    "exclude": ["node_modules", "dist", "misc", "__test__", "**/*.spec.ts", "app"],
+    "include": ["**/*.ts", "**/*.d.ts"]
 }

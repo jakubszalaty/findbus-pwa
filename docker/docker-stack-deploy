@@ -1,0 +1,6 @@
+#!/bin/zsh
+DIRNAME=$(dirname $0)
+ABS_PATH=$(realpath $DIRNAME)
+
+# source $ABS_PATH/env && \
+docker stack deploy --with-registry-auth -c $ABS_PATH/docker-stack.yml zditm-graphql

@@ -1,9 +1,4 @@
 {
-    "defaultSeverity": "error",
-    "extends": ["tslint:recommended"],
-    "jsRules": {
-        "no-unused-expression": true
-    },
     "rules": {
         "eofline": false,
         "semicolon": false,
@@ -16,15 +11,39 @@
         "curly": false,
         "interface-name": [false],
         "array-type": [false],
-        "no-empty-interface": false,
         "no-empty": false,
-        "arrow-parens": false,
+        "no-empty-interface": true,
+        "no-eval": true,
+        "no-inferrable-types": [true, "ignore-params"],
+        "no-misused-new": true,
+        "no-non-null-assertion": true,
+        "no-shadowed-variable": true,
+        "no-string-literal": false,
+        "no-string-throw": true,
+        "no-switch-case-fall-through": true,
+        "no-trailing-whitespace": true,
+        "no-unnecessary-initializer": true,
+        "no-unused-expression": true,
+        "no-use-before-declare": true,
+        "no-var-keyword": true,
         "object-literal-sort-keys": false,
-        "no-unused-expression": false,
-        "max-classes-per-file": [false],
-        "variable-name": [false],
-        "one-line": [false],
-        "one-variable-per-declaration": [false]
-    },
-    "rulesDirectory": []
+        "one-line": [true, "check-open-brace", "check-catch", "check-else", "check-whitespace"],
+        "prefer-const": true,
+        "radix": true,
+        "triple-equals": [true, "allow-null-check"],
+        "typedef-whitespace": [
+            true,
+            {
+                "call-signature": "nospace",
+                "index-signature": "nospace",
+                "parameter": "nospace",
+                "property-declaration": "nospace",
+                "variable-declaration": "nospace"
+            }
+        ],
+        "typeof-compare": true,
+        "unified-signatures": true,
+        "variable-name": false,
+        "whitespace": [true, "check-branch", "check-decl", "check-operator", "check-separator", "check-type"]
+    }
 }

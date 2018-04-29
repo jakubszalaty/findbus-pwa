@@ -1,0 +1,76 @@
+version: "3"
+services:
+
+    proxy:
+        deploy:
+            labels:
+                - "traefik.enable=true"
+                - "traefik.port=8080"
+                - "traefik.docker.network=proxy"
+                # - "traefik.frontend.auth.basic=master:$$apr1$$6fQxTjQN$$Z1FLUSq46kTkunsdSMyJU/"
+                - "traefik.frontend.rule=HostRegexp:traefik.{domain:[a-z0-9-.]+}"
+                - "traefik.backend.loadbalancer.sticky=true"
+            mode: global
+        image: traefik:1.5
+        networks:
+            - proxy
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - ./traefik:/etc/traefik
+
+    graphql-server:
+        command: yarn start
+        environment:
+            NODE_ENV: dev
+            PORT: 9000
+            SUBSCRIPTION_PORT: 9001
+            SUBSCRIPTION_ENDPOINT: "ws://ws-zditm-graphql.test/subscriptions"
+        deploy:
+            labels:
+
+                - 'traefik.backend.loadbalancer.sticky=true'
+                - 'traefik.docker.network=proxy'
+                - 'traefik.enable=true'
+                - 'traefik.frontend.passHostHeader=true'
+                - 'traefik.api.frontend.rule=HostRegexp:zditm-graphql.{domain:[a-z0-9-.]+}'
+                - 'traefik.api.port=9000'
+                - 'traefik.ws.frontend.rule=HostRegexp:ws-zditm-graphql.{domain:[a-z0-9-.]+}'
+                - 'traefik.ws.port=9001'
+            # tymczasowo
+            # placement:
+                # constraints: [node.role == worker]
+            replicas: 1
+            resources:
+                limits:
+                    cpus: '0.5'
+                    memory: 500M
+        image: zditm-graphql:dev
+        ports:
+            - 9229:9229
+        networks:
+            - proxy
+        volumes:
+            - ../:/app
+
+    # angular:
+    #     deploy:
+    #         labels:
+    #             - 'traefik.docker.network=proxy'
+    #             - 'traefik.enable=true'
+    #             - 'traefik.frontend.rule=HostRegexp:rp.{domain:[a-z0-9-.]+}'
+    #             - 'traefik.port=80'
+    #         replicas: 1
+    #     image: zditm-graphql:dev
+    #     networks:
+    #         - net
+    #         - proxy
+    #     volumes:
+    #         - ../app:/app
+
+networks:
+    proxy:
+        external:
+            name: proxy

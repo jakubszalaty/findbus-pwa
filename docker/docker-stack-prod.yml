@@ -2,6 +2,11 @@ version: "3"
 services:
     graphql-sever:
         command: yarn start:prod
+        environment:
+            NODE_ENV: prod
+            PORT: 9000
+            SUBSCRIPTION_PORT: 9001
+            SUBSCRIPTION_ENDPOINT: "wss://ws-zditm-graphql.webjs.eu/subscriptions"
         deploy:
             labels:
                 - 'traefik.backend.loadbalancer.sticky=true'
@@ -20,11 +25,25 @@ services:
                 limits:
                     cpus: '0.5'
                     memory: 500M
-        image: im-node-server:latest
+        image: zditm-graphql:prod
         networks:
             - proxy
         volumes:
             - ../:/app
+    # angular:
+    #     deploy:
+    #         labels:
+    #             - 'traefik.docker.network=proxy'
+    #             - 'traefik.enable=true'
+    #             - 'traefik.frontend.rule=HostRegexp:rp.{domain:[a-z0-9-.]+}'
+    #             - 'traefik.port=80'
+    #         replicas: 1
+    #     image: rp-nestjs-client:prod
+    #     networks:
+    #         - net
+    #         - proxy
+    #     volumes:
+    #         - ../app:/app
 networks:
     proxy:
         external:

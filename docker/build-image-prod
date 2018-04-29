@@ -1,0 +1,3 @@
+#!/bin/bash
+docker build -t zditm-graphql:prod . -f ./docker/Dockerfile
+#  docker build -t zditm-graphql-client:prod . -f ./docker/Dockerfile-client

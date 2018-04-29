@@ -60,4 +60,10 @@ export class VehicleResolver {
         // TODO: Create and move to VehicleService
         return fetch(`http://www.zditm.szczecin.pl/json/trasy.inc.php?gmvid=${gmvid}`).then(v => v.json())
     }
+
+    // @ResolveProperty('fromDetails')
+    // async getFromDetails({ from, nr }) {
+    //     // TODO: Create and move to VehicleService
+    //     return fetch(`http://www.zditm.szczecin.pl/json/trasy.inc.php?gmvid=1`).then(v => v.json())
+    // }
 }
