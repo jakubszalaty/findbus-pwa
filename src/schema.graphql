@@ -56,8 +56,54 @@ input VehicleWhereInput {
     id: Int!
 }
 
+type Departure {
+    line: String
+    direction: String
+    status: String
+}
+type Stop {
+    id: Int
+    lat: String
+    lnt: String
+    name: String
+    groupId: Int
+    columnId: Int
+}
+
+
+"Input for search stops"
+input StopsWhereInput {
+    id: Int
+    name: String
+    groupId: Int
+    columnId: Int
+}
+
+input StopWhereInput {
+    id: Int!
+}
+
+type StopWithDepartures {
+    id: Int
+    lat: String
+    lnt: String
+    name: String
+    groupId: Int
+    columnId: Int
+    departures: [Departure]
+}
+
+input StopsWithDeparturesWhereInput {
+    id: Int
+    name: String
+    groupId: Int
+}
+
 type Query {
     "Return active vehicles"
     vehicles(where: VehiclesWhereInput): [Vehicle]
     vehicle(where: VehicleWhereInput!): Vehicle
+    stops(where: StopsWhereInput): [Stop]
+    stopsWithDepartures(where: StopsWithDeparturesWhereInput!): [StopWithDepartures]
+    stop(where: StopWhereInput!): Stop
 }

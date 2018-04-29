@@ -8,14 +8,15 @@ import { importSchema } from 'graphql-import'
 import { AppController } from './app.controller'
 
 import { SubscriptionsModule } from './subscription/subscription.module'
-import { VehicleResolver } from './vehicle/vehicle.resolver'
+import { VehicleModule } from './vehicle/vehicle.module'
+import { StopModule } from './stop/stop.module'
 
 const isDev = process.env.NODE_ENV === 'dev'
 
 @Module({
-    imports: [SubscriptionsModule.forRoot(), GraphQLModule],
+    imports: [SubscriptionsModule.forRoot(), GraphQLModule, StopModule, VehicleModule],
     controllers: [AppController],
-    components: [VehicleResolver],
+    components: [],
 })
 export class ApplicationModule implements NestModule {
     constructor(

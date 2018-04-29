@@ -3,6 +3,8 @@
 export interface Query {
   vehicles?: Vehicle[] | null; /* Return active vehicles */
   vehicle?: Vehicle | null; 
+  stops?: Stop[] | null; 
+  stop?: Stop | null; 
 }
 /* Contains all information about specific vehicle */
 export interface Vehicle {
@@ -38,6 +40,15 @@ export interface Geometry {
   type?: string | null; 
   coordinates?: number[] | null; 
 }
+
+export interface Stop {
+  id?: number | null; 
+  lat?: string | null; 
+  lnt?: string | null; 
+  name?: string | null; 
+  groupId?: number | null; 
+  columnId?: number | null; 
+}
 /* Input for search verhicles */
 export interface VehiclesWhereInput {
   gmvid?: number | null; 
@@ -60,9 +71,28 @@ export interface VehiclesWhereInput {
 export interface VehicleWhereInput {
   id: number; 
 }
+/* Input for search stops */
+export interface StopsWhereInput {
+  id?: number | null; 
+  lat?: string | null; 
+  lnt?: string | null; 
+  name?: string | null; 
+  groupId?: number | null; 
+  columnId?: number | null; 
+}
+
+export interface StopWhereInput {
+  id: number; 
+}
 export interface VehiclesQueryArgs {
   where?: VehiclesWhereInput | null; 
 }
 export interface VehicleQueryArgs {
   where: VehicleWhereInput; 
+}
+export interface StopsQueryArgs {
+  where?: StopsWhereInput | null; 
+}
+export interface StopQueryArgs {
+  where: StopWhereInput; 
 }
