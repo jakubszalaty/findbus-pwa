@@ -1,0 +1,19 @@
+<mat-toolbar class="rp-toolbar" color="primary">
+  <mat-toolbar-row>
+    <!-- <span class="rp-toolbar-back-button">
+      <button mat-icon-button (click)="goBack()" *ngIf="showBack">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </span> -->
+    <span>
+      <button mat-icon-button (click)="openSidenav()" *ngIf="isMenuButtonVisible">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </span>
+    <span [routerLink]="['/']">Find bus</span>
+    <span class="rp-toolbar-spacer"></span>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row class="desktop-row"></mat-toolbar-row>
+  <mat-toolbar-row class="desktop-row"></mat-toolbar-row>
+</mat-toolbar>

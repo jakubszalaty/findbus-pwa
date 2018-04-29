@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+.main-fab {
+    transform: scale(0);
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    animation: showMainFab 0.3s 1 0.3s forwards;
+}
+
+@keyframes showMainFab {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.card-back-icon {
+    top: -4px;
+}
+
+[disabled] {
+    pointer-events: none;
+    cursor: default;
+}

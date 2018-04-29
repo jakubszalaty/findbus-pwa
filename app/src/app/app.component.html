@@ -1,0 +1,41 @@
+<mat-sidenav-container class="sidenav-container" [ngClass]="{'horizontal': isHorizontal}">
+    <mat-sidenav *ngIf="sidenavIsEnable" [(mode)]="sidenavMode" [(opened)]="sidenavIsOpen" (openedChange)="sideNaveChanged($event)"
+        [fixedInViewport]="true" class="sidenav">
+
+        <mat-toolbar class="toolbar-top" color="primary">
+            <mat-toolbar-row></mat-toolbar-row>
+            <mat-toolbar-row></mat-toolbar-row>
+            <mat-toolbar-row>
+                <p>Hello, {{ user ? user.name : 'Guest' }}!</p>
+            </mat-toolbar-row>
+        </mat-toolbar>
+
+        <mat-nav-list class="toolbar-list">
+            <a mat-list-item (click)="goTo('board/1')">
+                <mat-icon mat-list-icon>perm_media</mat-icon>
+                <p mat-line>Board list</p>
+            </a>
+        </mat-nav-list>
+
+        <div>
+            <mat-divider></mat-divider>
+            <mat-nav-list>
+
+                <a mat-list-item>
+                    <mat-icon mat-list-icon>settings</mat-icon>
+                    <p mat-line>Settings</p>
+                </a>
+
+            </mat-nav-list>
+        </div>
+
+
+    </mat-sidenav>
+
+    <mat-sidenav-content class="sidenav-content">
+        <app-header></app-header>
+        <div class="main-content">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

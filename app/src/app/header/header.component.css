@@ -1,0 +1,33 @@
+.rp-toolbar {
+    position: fixed;
+    top: 0;
+    z-index: 10;
+}
+
+.rp-toolbar-back-button {
+    width: 40px;
+}
+
+@media (min-width: 840px) {
+    .rp-toolbar {
+        z-index: initial;
+    }
+}
+
+.rp-toolbar-icon {
+    padding: 0 14px;
+}
+
+.rp-toolbar-spacer {
+    flex: 1 1 auto;
+}
+
+.desktop-row {
+    display: none;
+}
+
+@media (min-width: 840px) {
+    .desktop-row {
+        display: initial;
+    }
+}

@@ -1,0 +1,37 @@
+.main-content {
+    padding-top: 56px;
+    padding-bottom: 72px;
+}
+
+@media (min-width: 600px) {
+    .main-content {
+        padding-top: 64px;
+    }
+}
+
+.sidenav-content {
+    height: 100vh;
+    background-color: #eee;
+}
+
+.sidenav {
+    width: 90vw;
+    max-width: 256px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.toolbar-top {
+    min-height: 168px;
+}
+
+@media (min-width: 600px) {
+    .toolbar-top {
+        min-height: 192px;
+    }
+}
+
+.toolbar-list {
+    flex-grow: 1;
+}

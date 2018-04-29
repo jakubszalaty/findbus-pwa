@@ -43,10 +43,10 @@ services:
             # placement:
                 # constraints: [node.role == worker]
             replicas: 1
-            resources:
-                limits:
-                    cpus: '0.5'
-                    memory: 500M
+            # resources:
+            #     limits:
+            #         cpus: '0.5'
+            #         memory: 500M
         image: zditm-graphql:dev
         ports:
             - 9229:9229
@@ -55,20 +55,20 @@ services:
         volumes:
             - ../:/app
 
-    # angular:
-    #     deploy:
-    #         labels:
-    #             - 'traefik.docker.network=proxy'
-    #             - 'traefik.enable=true'
-    #             - 'traefik.frontend.rule=HostRegexp:rp.{domain:[a-z0-9-.]+}'
-    #             - 'traefik.port=80'
-    #         replicas: 1
-    #     image: zditm-graphql:dev
-    #     networks:
-    #         - net
-    #         - proxy
-    #     volumes:
-    #         - ../app:/app
+    angular:
+        command: yarn start
+        deploy:
+            labels:
+                - 'traefik.docker.network=proxy'
+                - 'traefik.enable=true'
+                - 'traefik.frontend.rule=HostRegexp:findbus.{domain:[a-z0-9-.]+}'
+                - 'traefik.port=4200'
+            replicas: 1
+        image: zditm-graphql:dev
+        networks:
+            - proxy
+        volumes:
+            - ../app:/app
 
 networks:
     proxy:

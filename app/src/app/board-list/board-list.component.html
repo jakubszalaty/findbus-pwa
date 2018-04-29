@@ -1,0 +1,28 @@
+<mat-card class="list-card">
+
+    <mat-card-content>
+        <mat-card-title>Bus stops</mat-card-title>
+        <mat-card-subtitle *ngIf="loading">Loading...</mat-card-subtitle>
+
+        <mat-nav-list>
+
+            <mat-list-item>
+                <mat-divider></mat-divider>
+                <p matLine>Board</p>
+
+                <a mat-icon-button [routerLink]="['/board', 1]">
+                    <mat-icon>perm_media</mat-icon>
+                </a>
+            </mat-list-item>
+
+        </mat-nav-list>
+    </mat-card-content>
+
+</mat-card>
+
+
+<!-- <div class="main-fab">
+    <button mat-fab color="accent" (click)="createPresentation()">
+        <mat-icon>add</mat-icon>
+    </button>
+</div> -->
