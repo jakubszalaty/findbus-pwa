@@ -35,3 +35,28 @@
 .toolbar-list {
     flex-grow: 1;
 }
+
+.bottom-bar {
+    position: fixed;
+    bottom: 0;
+    z-index: 999;
+    background: #fff;
+}
+
+.bottom-bar .button-group {
+    width: 100%;
+    display: flex;
+    max-width: 599px;
+    margin: 0 auto;
+}
+
+.bottom-bar span {
+    flex: 1;
+    text-align: center;
+}
+
+@media (min-width: 1024px) {
+    .bottom-bar mat-toolbar-row {
+        width: calc(100% - 256px);
+    }
+}

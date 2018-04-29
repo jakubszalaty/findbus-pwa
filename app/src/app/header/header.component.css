@@ -1,24 +1,24 @@
-.rp-toolbar {
+.toolbar {
     position: fixed;
     top: 0;
     z-index: 10;
 }
 
-.rp-toolbar-back-button {
+.toolbar-back-button {
     width: 40px;
 }
 
 @media (min-width: 840px) {
-    .rp-toolbar {
+    .toolbar {
         z-index: initial;
     }
 }
 
-.rp-toolbar-icon {
+.toolbar-icon {
     padding: 0 14px;
 }
 
-.rp-toolbar-spacer {
+.toolbar-spacer {
     flex: 1 1 auto;
 }
 
