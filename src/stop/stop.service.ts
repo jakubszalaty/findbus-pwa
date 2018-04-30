@@ -1,5 +1,6 @@
 import * as R from 'ramda'
 import fetch from 'node-fetch'
+import * as fs from 'fs-extra'
 import { Component, Inject } from '@nestjs/common'
 import { JSDOM } from 'jsdom'
 import { StopRaw } from '../typings/type'
@@ -27,9 +28,11 @@ export class StopService {
 
         const filterKey = R.keys(where).length ? whereEq(where) : R.always(true)
 
-        const stopRaw = (await fetch('https://www.zditm.szczecin.pl/json/slupki.inc.php').then((v) =>
-            v.json()
-        )) as StopRaw[]
+        // const stopRaw = (await fetch('https://www.zditm.szczecin.pl/json/slupki.inc.php').then((v) =>
+        //     v.json()
+        // )) as StopRaw[]
+
+        const stopRaw = await fs.readJSON('./misc/stops.json') as StopRaw[]
 
         const resolveData = R.pipe<StopRaw[], Stop[], Stop[]>(normalizeKeys, R.filter(filterKey))
 
