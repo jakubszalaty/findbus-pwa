@@ -56,6 +56,10 @@
 }
 
 @media (min-width: 1024px) {
+    /* tymczasowo */
+    .bottom-bar{
+        display: none;
+    }
     .bottom-bar mat-toolbar-row {
         width: calc(100% - 256px);
     }

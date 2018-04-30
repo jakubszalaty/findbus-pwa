@@ -12,8 +12,16 @@
 
         <mat-nav-list class="toolbar-list">
             <a mat-list-item (click)="goTo('board/1')">
-                <mat-icon mat-list-icon>perm_media</mat-icon>
-                <p mat-line>Board list</p>
+                <mat-icon mat-list-icon>list</mat-icon>
+                <p mat-line>Boards list</p>
+            </a>
+            <a mat-list-item (click)="goTo('board/1')">
+                <mat-icon mat-list-icon>directions_bus</mat-icon>
+                <p mat-line>Buses positions</p>
+            </a>
+            <a mat-list-item (click)="goTo('board/1')">
+                <mat-icon mat-list-icon>favorite</mat-icon>
+                <p mat-line>Favorites</p>
             </a>
         </mat-nav-list>
 
@@ -38,22 +46,22 @@
             <router-outlet></router-outlet>
         </div>
 
-        <mat-toolbar class="bottom-bar">
+        <mat-toolbar class="bottom-bar mat-elevation-z4" >
             <mat-toolbar-row>
                 <div class="button-group">
 
                     <span>
-                        <a mat-icon-button [routerLink]="['/']">
+                        <a mat-icon-button [routerLink]="['/']" [color]="true ? 'primary' : null">
                             <mat-icon>list</mat-icon>
                         </a>
                     </span>
                     <span>
-                        <a mat-icon-button [routerLink]="['/']">
+                        <a mat-icon-button [routerLink]="['/']" [color]="false ? 'primary' : null">
                             <mat-icon>directions_bus</mat-icon>
                         </a>
                     </span>
                     <span>
-                        <a mat-icon-button [routerLink]="['/']">
+                        <a mat-icon-button [routerLink]="['/']" [color]="false ? 'primary' : null">
                             <mat-icon>favorite</mat-icon>
                         </a>
                     </span>

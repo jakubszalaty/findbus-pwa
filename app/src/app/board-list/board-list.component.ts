@@ -3,6 +3,7 @@ import { Apollo } from 'apollo-angular'
 import { ActivatedRoute, Router } from '@angular/router'
 
 import { MatSnackBar } from '@angular/material'
+import { FormBuilder, FormGroup } from '@angular/forms'
 
 @Component({
   selector: 'app-board-list',
@@ -11,9 +12,23 @@ import { MatSnackBar } from '@angular/material'
 })
 export class BoardListComponent implements OnInit {
   loading = true
+  searchForm: FormGroup
+  constructor(
+    private apollo: Apollo,
+    private route: ActivatedRoute,
+    private router: Router,
+    fb: FormBuilder
+  ) {
+    this.searchForm = fb.group({
+      searchText: '',
+    })
+  }
 
-  constructor(private apollo: Apollo, private route: ActivatedRoute, private router: Router) {}
   ngOnInit() {
     this.loading = false
+  }
+
+  clearSearchText() {
+    this.searchForm.setValue({ searchText: '' })
   }
 }

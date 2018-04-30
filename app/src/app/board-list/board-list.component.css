@@ -18,3 +18,25 @@
         max-width: calc(1360px - 48px - 64px - 112px - 256px);
     }
 }
+
+.search-form {
+    background: #fff;
+    padding: 0 16px;
+    position: relative;
+}
+
+.search-form mat-form-field {
+    width: 100%;
+}
+
+.search-form .search-icon {
+    width: 1.5em;
+    top: 7px;
+    position: relative;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.list-item {
+    background: #fff;
+    margin-top: 0;
+}

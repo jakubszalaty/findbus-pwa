@@ -1,25 +1,31 @@
-<mat-card class="list-card">
+<div class="search-form mat-elevation-z2">
+    <form [formGroup]="searchForm">
+        <mat-form-field floatLabel="never">
+            <span matPrefix>
+                <mat-icon class="search-icon">search</mat-icon>
+            </span>
+            <input matInput placeholder="Search" formControlName="searchText">
+            <span class="pointer-cursor" matSuffix *ngIf="searchForm.value.searchText" (click)="clearSearchText()">
+                <mat-icon class="search-icon">clear</mat-icon>
+            </span>
+        </mat-form-field>
+    </form>
+</div>
 
-    <mat-card-content>
-        <mat-card-title>Bus stops</mat-card-title>
-        <mat-card-subtitle *ngIf="loading">Loading...</mat-card-subtitle>
 
-        <mat-nav-list>
+<p *ngIf="loading">Loading...</p>
+<mat-nav-list class="list-item">
+    <mat-list-item>
+        <mat-divider></mat-divider>
+        <p matLine>Turzyn Dworzec</p>
+    </mat-list-item>
 
-            <mat-list-item>
-                <mat-divider></mat-divider>
-                <p matLine>Board</p>
+    <mat-list-item>
+        <mat-divider></mat-divider>
+        <p matLine>Turzyn</p>
+    </mat-list-item>
 
-                <a mat-icon-button [routerLink]="['/board', 1]">
-                    <mat-icon>perm_media</mat-icon>
-                </a>
-            </mat-list-item>
-
-        </mat-nav-list>
-    </mat-card-content>
-
-</mat-card>
-
+</mat-nav-list>
 
 <!-- <div class="main-fab">
     <button mat-fab color="accent" (click)="createPresentation()">

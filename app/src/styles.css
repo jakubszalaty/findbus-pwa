@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
 .main-fab {
     transform: scale(0);
     position: fixed;
@@ -25,4 +26,16 @@
 [disabled] {
     pointer-events: none;
     cursor: default;
+}
+.pointer-cursor {
+    cursor: pointer;
+}
+
+/* overide for search */
+.search-form mat-form-field .mat-form-field-underline {
+    display: none;
+}
+
+.search-form mat-form-field .mat-form-field-wrapper {
+    padding-bottom: 0.5em;
 }
