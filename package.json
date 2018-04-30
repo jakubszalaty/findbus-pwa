@@ -10,7 +10,7 @@
         "stop": "pm2 delete main",
         "logs": "pm2 logs main",
         "create-types": "ts-node ./scripts/create-types.ts",
-        "prestart:prod": "tsc",
+        "prestart:prod": "yarn install && tsc",
         "start:prod": "pm2-docker start dist/index.js",
         "host:exec": "docker exec -it $(docker ps --format \"{{.Names}}\" | grep graphql-server)",
         "host:restart": "npm run host:exec -- npm run restart",

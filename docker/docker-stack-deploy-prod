@@ -9,6 +9,6 @@ PROD_DIR=/home/ubuntu/zditm-graphql
 cd $(dirname $ABS_PATH) && \
 rsync -avze ssh --delete \
     --exclude 'node_modules' --exclude '.git' --exclude 'dist' --exclude 'app' --exclude 'misc' . $HOST:$PROD_DIR && \
-# rsync -avze ssh --delete ./app/dist $HOST:$PROD_DIR/app && \
-# ssh $HOST "docker build -t zditm-graphql:prod $PROD_DIR -f $PROD_DIR/docker/Dockerfile && docker build -t zditm-graphql-client:prod $PROD_DIR/ -f $PROD_DIR/docker/Dockerfile-client && docker stack rm zditm-graphql && docker stack deploy --with-registry-auth -c $PROD_DIR/docker/docker-stack-prod.yml zditm-graphql"
-ssh $HOST "docker build -t zditm-graphql:prod $PROD_DIR -f $PROD_DIR/docker/Dockerfile && docker stack rm zditm-graphql && docker stack deploy --with-registry-auth -c $PROD_DIR/docker/docker-stack-prod.yml zditm-graphql"
+rsync -avze ssh --delete ./app/dist $HOST:$PROD_DIR/app && \
+ssh $HOST "docker build -t zditm-graphql:prod $PROD_DIR -f $PROD_DIR/docker/Dockerfile && docker build -t zditm-graphql-client:prod $PROD_DIR/ -f $PROD_DIR/docker/Dockerfile-client && docker stack rm zditm-graphql && docker stack deploy --with-registry-auth -c $PROD_DIR/docker/docker-stack-prod.yml zditm-graphql"
+# ssh $HOST "docker build -t zditm-graphql:prod $PROD_DIR -f $PROD_DIR/docker/Dockerfile && docker stack rm zditm-graphql && docker stack deploy --with-registry-auth -c $PROD_DIR/docker/docker-stack-prod.yml zditm-graphql"

@@ -30,20 +30,17 @@ services:
             - proxy
         volumes:
             - ../:/app
-    # angular:
-    #     deploy:
-    #         labels:
-    #             - 'traefik.docker.network=proxy'
-    #             - 'traefik.enable=true'
-    #             - 'traefik.frontend.rule=HostRegexp:rp.{domain:[a-z0-9-.]+}'
-    #             - 'traefik.port=80'
-    #         replicas: 1
-    #     image: rp-nestjs-client:prod
-    #     networks:
-    #         - net
-    #         - proxy
-    #     volumes:
-    #         - ../app:/app
+    angular:
+        deploy:
+            labels:
+                - 'traefik.docker.network=proxy'
+                - 'traefik.enable=true'
+                - 'traefik.frontend.rule=HostRegexp:findbus.{domain:[a-z0-9-.]+}'
+                - 'traefik.port=80'
+            replicas: 1
+        image: zditm-graphql-client:prod
+        networks:
+            - proxy
 networks:
     proxy:
         external:
