@@ -14,7 +14,7 @@
 
 
 <p *ngIf="loading">Loading...</p>
-<mat-nav-list class="list-item">
+<mat-nav-list class="item-list">
     <!-- <mat-list-item *ngFor="let stop of stopsList | stopsFilter:searchForm.value.searchText"> -->
     <mat-list-item *ngFor="let stop of stopsList | stopsFilter:listFilter">
         <mat-divider></mat-divider>
