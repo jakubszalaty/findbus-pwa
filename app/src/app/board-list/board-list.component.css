@@ -23,9 +23,10 @@
     background: #fff;
     padding: 0 16px;
     z-index: 1;
-    /* position: relative; */
     position: fixed;
-    width: 100%;
+    width: auto;
+    left: 0;
+    right: 0;
 }
 
 @media (min-width: 840px) {
@@ -36,6 +37,7 @@
         right: 15px;
     }
 }
+
 @media (min-width: 1024px) {
     .search-form {
         left: 256px;
