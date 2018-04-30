@@ -27,8 +27,9 @@ async function bootstrap() {
 
     fs.writeFileSync(schemaFileName, typeDefs)
     const result = execSync(
-        `gql-gen --url ${serverUrl} --template typescript --out ${outputFile} "./${schemaFileName}"`,
+        `gql-gen --url ${serverUrl} --template typescript --out ${outputFile} "./${schemaFileName}"`
     )
+    fs.copyFileSync(outputFile, './app/src/schema-types.ts')
     fs.unlinkSync(schemaFileName)
 }
 bootstrap()
