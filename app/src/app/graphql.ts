@@ -76,3 +76,23 @@ export interface StopsQueryResponse {
     stops: Stop[]
     loading: boolean
 }
+
+export const STOPS_WITH_DEPARTURES_QUERY = gql`
+    query stops($where: StopsWithDeparturesWhereInput!) {
+        stopsWithDepartures(where: $where) {
+            id
+            name
+            groupId
+            columnId
+            departures {
+                line
+                direction
+                status
+            }
+        }
+    }
+`
+export interface StopsWithDeparturesQueryResponse {
+    stopsWithDepartures: Stop[]
+    loading: boolean
+}

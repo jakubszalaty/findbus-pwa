@@ -1,0 +1,15 @@
+<p *ngIf="loading">Loading...</p>
+<mat-card class="list-card" *ngFor="let stop of stopsList">
+    <p>{{stop.name}}({{stop.groupId}}{{stop.columnId}})</p>
+    <mat-list>
+        <mat-list-item *ngFor="let departures of stop.departures">
+            <p matLine>{{departures.line}} - {{departures.direction}} - {{departures.status}}</p>
+        </mat-list-item>
+    </mat-list>
+</mat-card>
+
+<!-- <div class="main-fab">
+    <button mat-fab color="accent" (click)="createPresentation()">
+        <mat-icon>add</mat-icon>
+    </button>
+</div> -->

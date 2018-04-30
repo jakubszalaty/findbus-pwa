@@ -32,7 +32,7 @@ export class StopService {
         //     v.json()
         // )) as StopRaw[]
 
-        const stopRaw = await fs.readJSON('./misc/stops.json') as StopRaw[]
+        const stopRaw = (await fs.readJSON('./misc/stops.json')) as StopRaw[]
 
         const resolveData = R.pipe<StopRaw[], Stop[], Stop[]>(normalizeKeys, R.filter(filterKey))
 
@@ -45,6 +45,11 @@ export class StopService {
                 `https://www.zditm.szczecin.pl/json/tablica.inc.php?slupek=${groupId}${columnId}`
             ).then((v) => v.text())
             const dom = new JSDOM(html) as any
+            const isError = !!dom.window.document.querySelector('tbody tr td.gmvblad')
+            if (isError) {
+                return null
+            }
+
             const data = [...dom.window.document.querySelectorAll('tbody tr')].map((v) => ({
                 line: v.children[0].textContent,
                 direction: v.children[1].textContent,

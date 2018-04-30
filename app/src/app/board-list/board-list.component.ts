@@ -1,8 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Apollo } from 'apollo-angular'
-import { ActivatedRoute, Router } from '@angular/router'
 
-import { MatSnackBar } from '@angular/material'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { STOPS_QUERY, StopsQueryResponse } from '../graphql'
 import { ApolloQueryResult } from 'apollo-client'
@@ -13,12 +11,8 @@ import { uniqBy, prop, has } from 'ramda'
 
 import { Observable } from 'rxjs/Observable'
 import { timer } from 'rxjs/observable/timer'
-import 'rxjs/add/observable/combineLatest'
-import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/switchMap'
 import 'rxjs/add/operator/debounce'
-
-import gql from 'graphql-tag'
 
 @Component({
     selector: 'app-board-list',
@@ -31,12 +25,7 @@ export class BoardListComponent implements OnInit {
     stopsList: Stop[]
     listFilter: string
 
-    constructor(
-        private apollo: Apollo,
-        private route: ActivatedRoute,
-        private router: Router,
-        fb: FormBuilder
-    ) {
+    constructor(private apollo: Apollo, fb: FormBuilder) {
         this.searchForm = fb.group({
             searchText: '',
         })

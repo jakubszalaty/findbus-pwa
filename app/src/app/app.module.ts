@@ -56,9 +56,17 @@ import { ClipboardModule } from 'ngx-clipboard'
 import { WindowRef } from './windowRef/windowRef'
 import { ShareService } from './share/share.service'
 import { BoardListComponent } from './board-list/board-list.component'
+import { BoardViewComponent } from './board-view/board-view.component'
 
 @NgModule({
-    declarations: [AppComponent, BoardListComponent, HeaderComponent, OrderByPipe, StopsFilter],
+    declarations: [
+        AppComponent,
+        BoardListComponent,
+        BoardViewComponent,
+        HeaderComponent,
+        OrderByPipe,
+        StopsFilter,
+    ],
     imports: [
         BrowserModule,
         FlexLayoutModule,
