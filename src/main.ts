@@ -10,9 +10,10 @@ async function bootstrap() {
 
     // Setup cors
     const corsOptions = {
-        origin: false,
+        origin: /(.*\.webjs.eu|.*\.test)/,
         credentials: true,
     }
+
     app.use(cors(corsOptions))
 
     await app.listen(PORT).then(() => {

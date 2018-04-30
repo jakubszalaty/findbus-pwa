@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { Stop } from '../schema-types'
 
 // export const DELETE_RESOURCE_FILE = gql`
 //     mutation($where: ResourceWhereUniqueInput!) {
@@ -61,3 +62,17 @@ import gql from 'graphql-tag'
 // export interface NewPresentationSubcriptionResponse {
 //     node: Presentation
 // }
+
+export const STOPS_QUERY = gql`
+    query stops {
+        stops {
+            id
+            groupId
+            name
+        }
+    }
+`
+export interface StopsQueryResponse {
+    stops: Stop[]
+    loading: boolean
+}

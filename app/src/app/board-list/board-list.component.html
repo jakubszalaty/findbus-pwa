@@ -15,16 +15,11 @@
 
 <p *ngIf="loading">Loading...</p>
 <mat-nav-list class="list-item">
-    <mat-list-item>
+    <!-- <mat-list-item *ngFor="let stop of stopsList | stopsFilter:searchForm.value.searchText"> -->
+    <mat-list-item *ngFor="let stop of stopsList | stopsFilter:listFilter">
         <mat-divider></mat-divider>
-        <p matLine>Turzyn Dworzec</p>
+        <p matLine>{{stop.name}}</p>
     </mat-list-item>
-
-    <mat-list-item>
-        <mat-divider></mat-divider>
-        <p matLine>Turzyn</p>
-    </mat-list-item>
-
 </mat-nav-list>
 
 <!-- <div class="main-fab">
