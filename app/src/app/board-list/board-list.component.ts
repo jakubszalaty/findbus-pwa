@@ -24,6 +24,7 @@ export class BoardListComponent implements OnInit {
     searchForm: FormGroup
     stopsList: Stop[]
     listFilter: string
+    viewPortItems: Stop[]
 
     constructor(private apollo: Apollo, fb: FormBuilder) {
         this.searchForm = fb.group({
