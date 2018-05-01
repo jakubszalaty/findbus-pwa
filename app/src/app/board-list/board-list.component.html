@@ -4,7 +4,7 @@
             <span matPrefix>
                 <mat-icon class="search-icon">search</mat-icon>
             </span>
-            <input matInput placeholder="Search" formControlName="searchText">
+            <input matInput placeholder="Search" formControlName="searchText" autocomplete="off">
             <span class="pointer-cursor" matSuffix *ngIf="searchForm.value.searchText" (click)="clearSearchText()">
                 <mat-icon class="search-icon">clear</mat-icon>
             </span>
