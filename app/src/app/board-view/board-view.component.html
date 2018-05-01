@@ -1,12 +1,53 @@
-<p *ngIf="loading">Loading...</p>
-<mat-card class="list-card" *ngFor="let stop of stopsList" [@fadeInAnimation]>
-    <p>{{stop.name}}({{stop.groupId}}{{stop.columnId}})</p>
-    <mat-list>
-        <mat-list-item *ngFor="let departures of stop.departures">
-            <p matLine>{{departures.line}} - {{departures.direction}} - {{departures.status}}</p>
-        </mat-list-item>
-    </mat-list>
-</mat-card>
+<!-- <div class="board-cards">
+    <p *ngIf="loading">Loading...</p>
+    <mat-card class="list-card" *ngFor="let stop of stopsList" [@fadeInAnimation]>
+        <p>{{stop.name}}({{stop.groupId}}{{stop.columnId}})</p>
+        <mat-list>
+            <mat-list-item *ngFor="let departures of stop.departures">
+                <p matLine>{{departures.line}} - {{departures.direction}} - {{departures.status}}</p>
+            </mat-list-item>
+        </mat-list>
+    </mat-card>
+</div> -->
+
+<div class="panel-states">
+
+    <mat-card *ngFor="let stop of stopsList" class="panel-state-card" [@fadeInAnimation]>
+        <mat-card-title>
+            <span>
+                {{stop.name}}
+            </span>
+            <b>{{stop.groupId}}{{stop.columnId}}</b>
+        </mat-card-title>
+        <mat-card-content>
+            <mat-list dense>
+                <mat-list-item>
+                    <div class="list-row">
+                        <span>Line</span>
+                        <span>Destination</span>
+                        <span>Arrival</span>
+                    </div>
+                </mat-list-item>
+                <mat-list-item *ngFor="let departures of stop.departures">
+                    <div class="list-row">
+                        <span>{{departures.line}}</span>
+                        <span>{{departures.direction}}</span>
+                        <span>{{departures.status}}</span>
+                        <!-- <span>
+                                <mat-icon *ngIf="busInfo.LowFloor">accessible</mat-icon>
+                                <mat-icon *ngIf="busInfo.OnStop">directions_bus</mat-icon>
+                                <span *ngIf="!busInfo.OnStop">
+                                    <span *ngIf="busInfo.FromSchedule">~</span>{{busInfo.Arrival}}m
+                                </span>
+                            </span> -->
+
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
+
+</div>
 
 <!-- <div class="main-fab">
     <button mat-fab color="accent" (click)="createPresentation()">
