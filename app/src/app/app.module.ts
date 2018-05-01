@@ -54,6 +54,7 @@ import { SidenavService } from './sidenav/sidenav.service'
 
 import { ClipboardModule } from 'ngx-clipboard'
 import { WindowRef } from './windowRef/windowRef'
+import { VirtualScrollModule } from 'angular2-virtual-scroll'
 import { ShareService } from './share/share.service'
 import { BoardListComponent } from './board-list/board-list.component'
 import { BoardViewComponent } from './board-view/board-view.component'
@@ -77,6 +78,8 @@ import { BoardViewComponent } from './board-view/board-view.component'
         GraphQLModule,
         // MaterialDesign
         BrowserAnimationsModule,
+        // Virtual scroll
+        VirtualScrollModule,
         MatAutocompleteModule,
         MatButtonModule,
         MatButtonToggleModule,
