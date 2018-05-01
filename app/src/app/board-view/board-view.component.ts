@@ -12,16 +12,18 @@ import 'rxjs/add/operator/switchMap'
 import 'rxjs/add/operator/debounce'
 import { ApolloQueryResult } from 'apollo-client'
 import { StopsWithDeparturesQueryResponse, STOPS_WITH_DEPARTURES_QUERY } from '../graphql'
+import { Subscription } from 'rxjs/Subscription'
 
 @Component({
     selector: 'app-board-view',
     templateUrl: './board-view.component.html',
     styleUrls: ['./board-view.component.css'],
 })
-export class BoardViewComponent implements OnInit {
+export class BoardViewComponent implements OnInit, OnDestroy {
     loading = true
     stopsList: Stop[]
     groupId$: Observable<number>
+    subscriptions: Subscription[] = []
 
     constructor(private apollo: Apollo, private route: ActivatedRoute, private router: Router) {}
 
@@ -44,11 +46,19 @@ export class BoardViewComponent implements OnInit {
             where: { groupId },
         })).switchMap((variables: any) => getQuery(variables))
 
-        stopsWithDeparturesQuery.subscribe((response) => {
+        const querySubscription = stopsWithDeparturesQuery.subscribe((response) => {
             this.stopsList = response.data.stopsWithDepartures
             this.loading = false
             console.log(this.stopsList)
         })
 
+        this.subscriptions = [...this.subscriptions, querySubscription]
+    }
+    ngOnDestroy(): void {
+        for (const sub of this.subscriptions) {
+            if (sub && sub.unsubscribe) {
+                sub.unsubscribe()
+            }
+        }
     }
 }
