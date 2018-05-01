@@ -1,6 +1,6 @@
 .main-content {
     padding-top: 56px;
-    padding-bottom: 72px;
+    /* padding-bottom: 72px; */
 }
 
 @media (min-width: 600px) {
