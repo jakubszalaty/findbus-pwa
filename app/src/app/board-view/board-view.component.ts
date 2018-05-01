@@ -13,11 +13,13 @@ import 'rxjs/add/operator/debounce'
 import { ApolloQueryResult } from 'apollo-client'
 import { StopsWithDeparturesQueryResponse, STOPS_WITH_DEPARTURES_QUERY } from '../graphql'
 import { Subscription } from 'rxjs/Subscription'
+import { fadeInAnimation } from '../animations/fade-in.animation'
 
 @Component({
     selector: 'app-board-view',
     templateUrl: './board-view.component.html',
     styleUrls: ['./board-view.component.css'],
+    animations: [fadeInAnimation],
 })
 export class BoardViewComponent implements OnInit, OnDestroy {
     loading = true
@@ -47,9 +49,8 @@ export class BoardViewComponent implements OnInit, OnDestroy {
         })).switchMap((variables: any) => getQuery(variables))
 
         const querySubscription = stopsWithDeparturesQuery.subscribe((response) => {
-            this.stopsList = response.data.stopsWithDepartures
             this.loading = false
-            console.log(this.stopsList)
+            this.stopsList = response.data.stopsWithDepartures
         })
 
         this.subscriptions = [...this.subscriptions, querySubscription]

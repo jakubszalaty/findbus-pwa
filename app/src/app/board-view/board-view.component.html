@@ -1,5 +1,5 @@
 <p *ngIf="loading">Loading...</p>
-<mat-card class="list-card" *ngFor="let stop of stopsList">
+<mat-card class="list-card" *ngFor="let stop of stopsList" [@fadeInAnimation]>
     <p>{{stop.name}}({{stop.groupId}}{{stop.columnId}})</p>
     <mat-list>
         <mat-list-item *ngFor="let departures of stop.departures">

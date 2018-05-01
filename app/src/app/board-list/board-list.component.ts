@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import * as R from 'ramda'
+import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core'
 import { Apollo } from 'apollo-angular'
 
 import { FormBuilder, FormGroup } from '@angular/forms'
@@ -6,18 +7,17 @@ import { STOPS_QUERY, StopsQueryResponse } from '../graphql'
 import { ApolloQueryResult } from 'apollo-client'
 
 import { Stop } from '../../schema-types'
-
-import { uniqBy, prop, has } from 'ramda'
-
 import { Observable } from 'rxjs/Observable'
 import { timer } from 'rxjs/observable/timer'
 import 'rxjs/add/operator/switchMap'
 import 'rxjs/add/operator/debounce'
+import { fadeInAnimation } from '../animations/fade-in.animation'
 
 @Component({
     selector: 'app-board-list',
     templateUrl: './board-list.component.html',
     styleUrls: ['./board-list.component.css'],
+    animations: [fadeInAnimation],
 })
 export class BoardListComponent implements OnInit {
     loading = true
@@ -39,15 +39,16 @@ export class BoardListComponent implements OnInit {
 
         stopsQuery.subscribe((response) => {
             // this.stopsList = response.data.stops
-            this.stopsList = uniqBy(prop('name'), response.data.stops)
             this.loading = false
+
+            this.stopsList = R.pipe(R.uniqBy(R.prop('name')), R.sortBy(R.prop('name')))(response.data.stops)
         })
 
         this.searchForm.valueChanges
             .distinctUntilChanged()
             .debounce(() => timer(100))
             .subscribe((data) => {
-                this.listFilter = has('searchText', data) ? data.searchText : this.listFilter
+                this.listFilter = R.has('searchText', data) ? data.searchText : this.listFilter
             })
     }
 

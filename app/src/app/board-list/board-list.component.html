@@ -1,33 +1,37 @@
-<div class="search-form mat-elevation-z2">
-    <form [formGroup]="searchForm">
-        <mat-form-field floatLabel="never">
-            <span matPrefix>
-                <mat-icon class="search-icon">search</mat-icon>
-            </span>
-            <input matInput placeholder="Search" formControlName="searchText" autocomplete="off">
-            <span class="pointer-cursor" matSuffix *ngIf="searchForm.value.searchText" (click)="clearSearchText()">
-                <mat-icon class="search-icon">clear</mat-icon>
-            </span>
-        </mat-form-field>
-    </form>
+<div [@fadeInAnimation]>
+    <div class="search-form mat-elevation-z2">
+        <form [formGroup]="searchForm">
+            <mat-form-field floatLabel="never">
+                <span matPrefix>
+                    <mat-icon class="search-icon">search</mat-icon>
+                </span>
+                <input matInput placeholder="Search" formControlName="searchText" autocomplete="off">
+                <span class="pointer-cursor" matSuffix *ngIf="searchForm.value.searchText" (click)="clearSearchText()">
+                    <mat-icon class="search-icon">clear</mat-icon>
+                </span>
+            </mat-form-field>
+        </form>
+    </div>
+
+
+    <mat-list class="item-list">
+        <virtual-scroll [items]="stopsList | stopsFilter:listFilter" (update)="viewPortItems = $event">
+            <!-- <mat-list-item *ngFor="let stop of stopsList | stopsFilter:searchForm.value.searchText"> -->
+            <mat-list-item *ngFor="let stop of viewPortItems">
+                <!-- <mat-list-item *ngFor="let stop of viewPortItems"> -->
+                <mat-divider></mat-divider>
+                <p matLine>{{stop.name}}</p>
+                <a mat-icon-button [routerLink]="['/','stop', stop.groupId]">
+                    <mat-icon>navigate_next</mat-icon>
+                </a>
+            </mat-list-item>
+        </virtual-scroll>
+    </mat-list>
+
+    <p *ngIf="loading">Loading...</p>
+
+
 </div>
-
-
-<p *ngIf="loading">Loading...</p>
-<mat-list class="item-list">
-    <virtual-scroll [items]="stopsList | stopsFilter:listFilter" (update)="viewPortItems = $event">
-        <!-- <mat-list-item *ngFor="let stop of stopsList | stopsFilter:searchForm.value.searchText"> -->
-        <mat-list-item *ngFor="let stop of viewPortItems">
-            <!-- <mat-list-item *ngFor="let stop of viewPortItems"> -->
-            <mat-divider></mat-divider>
-            <p matLine>{{stop.name}}</p>
-            <a mat-icon-button [routerLink]="['/','stop', stop.groupId]">
-                <mat-icon>navigate_next</mat-icon>
-            </a>
-        </mat-list-item>
-    </virtual-scroll>
-</mat-list>
-
 <!-- <div class="main-fab">
     <button mat-fab color="accent" (click)="createPresentation()">
         <mat-icon>add</mat-icon>
