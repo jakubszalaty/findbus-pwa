@@ -10,6 +10,14 @@
     </mat-card>
 </div> -->
 
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [clickableIcons]="false" [disableDefaultUI]="true">
+
+    <agm-marker [latitude]="userLat" [longitude]="userLng"></agm-marker>
+    <!-- TODO: cos sie nie wyswietla moze trzeba odswierzyc czy cos -->
+    <!-- <agm-marker *ngFor="let stop of stopsList" [latitude]="stop.lat" [longitude]="stop.lnt"></agm-marker> -->
+
+</agm-map>
+
 <div class="panel-states">
 
     <mat-card *ngFor="let stop of stopsList" class="panel-state-card" [@fadeInAnimation]>

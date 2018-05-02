@@ -14,12 +14,16 @@ import { ApolloQueryResult } from 'apollo-client'
 import { StopsWithDeparturesQueryResponse, STOPS_WITH_DEPARTURES_QUERY } from '../graphql'
 import { Subscription } from 'rxjs/Subscription'
 import { fadeInAnimation } from '../animations/fade-in.animation'
+import { LatLngBoundsLiteral, GoogleMapsAPIWrapper } from '@agm/core'
+
+import * as R from 'ramda'
 
 @Component({
     selector: 'app-board-view',
     templateUrl: './board-view.component.html',
     styleUrls: ['./board-view.component.css'],
     animations: [fadeInAnimation],
+    providers: [GoogleMapsAPIWrapper],
 })
 export class BoardViewComponent implements OnInit, OnDestroy {
     loading = true
@@ -27,9 +31,28 @@ export class BoardViewComponent implements OnInit, OnDestroy {
     groupId$: Observable<number>
     subscriptions: Subscription[] = []
 
-    constructor(private apollo: Apollo, private route: ActivatedRoute, private router: Router) {}
+    lat = 53.4461311
+    lng = 14.49227
+    zoom = 16
+    userLat = 53.4461311
+    userLng = 14.49227
+
+    constructor(
+        private apollo: Apollo,
+        private route: ActivatedRoute,
+        private router: Router,
+        private googleMapsAPIWrapper: GoogleMapsAPIWrapper
+    ) {}
 
     ngOnInit() {
+        // zamienic na observable
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                this.userLat = position.coords.latitude
+                this.userLng = position.coords.longitude
+            })
+        }
+
         this.groupId$ = this.route.paramMap.map((params) => {
             return Number(params.get('groupId'))
         })
@@ -51,6 +74,7 @@ export class BoardViewComponent implements OnInit, OnDestroy {
         const querySubscription = stopsWithDeparturesQuery.subscribe((response) => {
             this.loading = false
             this.stopsList = response.data.stopsWithDepartures
+            this.findStopCenter()
         })
 
         this.subscriptions = [...this.subscriptions, querySubscription]
@@ -61,5 +85,19 @@ export class BoardViewComponent implements OnInit, OnDestroy {
                 sub.unsubscribe()
             }
         }
+    }
+    selectStop(stop) {
+        console.log(stop)
+    }
+
+    findStopCenter() {
+        const getCenter = (v, init) => R.reduce((a, b) => [(Number(a[0]) + Number(b[0])) / 2, (Number(a[1]) + Number(b[1])) / 2], init)(v)
+        const findCenterCords: any = R.pipe(
+            R.map(R.props(['lnt', 'lat'])),
+            R.converge(getCenter, [R.identity, R.head])
+        )
+        const centerCords = findCenterCords(this.stopsList)
+        this.lng = centerCords[0]
+        this.lat = centerCords[1]
     }
 }

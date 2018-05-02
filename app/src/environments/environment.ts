@@ -5,7 +5,7 @@
 
 export const environment = {
     production: false,
-    serverUri: 'http://zditm-graphql.test',
-    serverApiUri: 'http://zditm-graphql.test/graphql',
-    serverApiWebsocketUri: 'ws://ws-zditm-graphql.test/subscriptions',
+    serverUri: 'https://zditm-graphql.test',
+    serverApiUri: 'https://zditm-graphql.test/graphql',
+    serverApiWebsocketUri: 'wss://ws-zditm-graphql.test/subscriptions',
 }

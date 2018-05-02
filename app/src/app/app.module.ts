@@ -39,6 +39,10 @@ import {
     MatStepperModule,
 } from '@angular/material'
 
+import { ClipboardModule } from 'ngx-clipboard'
+
+import { AgmCoreModule } from '@agm/core'
+
 import { AppComponent } from './app.component'
 
 import { GraphQLModule } from './apollo.config'
@@ -52,7 +56,6 @@ import { StopsFilter } from './pipes/stops-filter.pipe'
 
 import { SidenavService } from './sidenav/sidenav.service'
 
-import { ClipboardModule } from 'ngx-clipboard'
 import { WindowRef } from './windowRef/windowRef'
 import { VirtualScrollModule } from 'angular2-virtual-scroll'
 import { ShareService } from './share/share.service'
@@ -80,6 +83,10 @@ import { BoardViewComponent } from './board-view/board-view.component'
         BrowserAnimationsModule,
         // Virtual scroll
         VirtualScrollModule,
+        // Google maps
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyADqXf8Cw_37HRnrcyeLznjKGsBSn0u5uw',
+        }),
         MatAutocompleteModule,
         MatButtonModule,
         MatButtonToggleModule,

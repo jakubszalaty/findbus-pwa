@@ -84,6 +84,8 @@ export const STOPS_WITH_DEPARTURES_QUERY = gql`
             name
             groupId
             columnId
+            lnt
+            lat
             departures {
                 line
                 direction
