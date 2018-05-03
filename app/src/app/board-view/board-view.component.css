@@ -27,6 +27,7 @@ agm-map {
     /* margin: 16px 16px 0; */
     /* padding-bottom: 64px; */
     padding: 16px 16px 64px;
+    min-height: calc(100vh - 64px - 64px - 250px - 16px);
     position: relative;
     background: #eee;
     z-index: 9;

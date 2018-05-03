@@ -8,11 +8,11 @@
     width: 40px;
 }
 
-@media (min-width: 840px) {
+/* @media (min-width: 840px) {
     .toolbar {
         z-index: initial;
     }
-}
+} */
 
 .toolbar-icon {
     padding: 0 14px;
