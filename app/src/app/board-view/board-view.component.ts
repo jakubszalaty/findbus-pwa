@@ -46,12 +46,12 @@ export class BoardViewComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         // zamienic na observable
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((position) => {
-                this.userLat = position.coords.latitude
-                this.userLng = position.coords.longitude
-            })
-        }
+        // if (navigator.geolocation) {
+        //     navigator.geolocation.getCurrentPosition((position) => {
+        //         this.userLat = position.coords.latitude
+        //         this.userLng = position.coords.longitude
+        //     })
+        // }
 
         this.groupId$ = this.route.paramMap.map((params) => {
             return Number(params.get('groupId'))
