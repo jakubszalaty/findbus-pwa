@@ -91,7 +91,10 @@ export class BoardViewComponent implements OnInit, OnDestroy {
     }
 
     findStopCenter() {
-        const getCenter = (v, init) => R.reduce((a, b) => [(Number(a[0]) + Number(b[0])) / 2, (Number(a[1]) + Number(b[1])) / 2], init)(v)
+        const getCenter = (v, init) =>
+            R.reduce((a, b) => [(Number(a[0]) + Number(b[0])) / 2, (Number(a[1]) + Number(b[1])) / 2], init)(
+                v
+            )
         const findCenterCords: any = R.pipe(
             R.map(R.props(['lnt', 'lat'])),
             R.converge(getCenter, [R.identity, R.head])
@@ -99,5 +102,8 @@ export class BoardViewComponent implements OnInit, OnDestroy {
         const centerCords = findCenterCords(this.stopsList)
         this.lng = centerCords[0]
         this.lat = centerCords[1]
+    }
+    getNumber(v: string) {
+        return Number(v)
     }
 }

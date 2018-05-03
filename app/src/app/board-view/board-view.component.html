@@ -11,18 +11,26 @@
 </div> -->
 
 <div class="map-outer">
-    <agm-map *ngIf="stopsList && stopsList.length" [latitude]="lat" [longitude]="lng" [zoom]="zoom" [clickableIcons]="false" [disableDefaultUI]="true">
+    <agm-map *ngIf="stopsList && stopsList.length" [latitude]="lat" [longitude]="lng" [zoom]="zoom" [clickableIcons]="false"
+        [disableDefaultUI]="true">
 
         <!-- <agm-marker [latitude]="userLat" [longitude]="userLng"></agm-marker> -->
         <!-- TODO: cos sie nie wyswietla moze trzeba odswierzyc czy cos -->
-        <!-- <agm-marker *ngFor="let stop of stopsList" [latitude]="stop.lat" [longitude]="stop.lnt"></agm-marker> -->
+        <agm-marker *ngFor="let stop of stopsList" [latitude]="getNumber(stop.lat)" [longitude]="getNumber(stop.lnt)" (markerClick)="selectStop(stop)">
+            <agm-info-window>
+                {{stop.groupId}}{{stop.columnId}}
+                <button mat-fab color="accent">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </agm-info-window>
+        </agm-marker>
 
     </agm-map>
 </div>
 <div class="spacer"></div>
 <div class="panel-states mat-elevation-z2" *ngIf="stopsList && stopsList.length">
 
-    <mat-card *ngFor="let stop of stopsList" class="panel-state-card" [@fadeInAnimation]>
+    <mat-card *ngFor="let stop of stopsList | orderBy:'id'" class="panel-state-card" [@fadeInAnimation]>
         <mat-card-title>
             <span>
                 {{stop.name}}

@@ -8,7 +8,7 @@
 
 .map-outer {
     background: #dfdfdf;
-    height: 250px;
+    height: 45vh;
     position: fixed;
     z-index: 8;
     width: 100%;
@@ -27,14 +27,14 @@ agm-map {
     /* margin: 16px 16px 0; */
     /* padding-bottom: 64px; */
     padding: 16px 16px 64px;
-    min-height: calc(100vh - 64px - 64px - 250px - 16px);
+    min-height: calc(100vh - 64px - 64px - 45vh - 16px);
     position: relative;
     background: #eee;
     z-index: 9;
 }
 
 .spacer{
-    height: 250px;
+    height: 45vh;
 }
 .panel-states::after {
     content: "";
