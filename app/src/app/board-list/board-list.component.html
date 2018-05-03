@@ -28,10 +28,10 @@
         </virtual-scroll>
     </mat-list>
 
-    <p *ngIf="loading">Loading...</p>
-
 
 </div>
+
+<mat-progress-spinner *ngIf="loading" mode="indeterminate" diameter="50"></mat-progress-spinner>
 <!-- <div class="main-fab">
     <button mat-fab color="accent" (click)="createPresentation()">
         <mat-icon>add</mat-icon>

@@ -57,11 +57,15 @@
 }
 
 .item-list {
-    background: #fff;
     margin-top: 0;
     padding-top: 0;
     /* padding-top: 53.5px; */
     position: relative;
+}
+
+
+.item-list mat-list-item {
+    background: #fff;
 }
 
 @media (min-width: 840px) {
@@ -76,4 +80,11 @@ virtual-scroll {
     display: block;
     width: 100%;
     height: calc(100vh - 128px - 38px);
+}
+
+mat-progress-spinner {
+    position: absolute;
+    z-index: 1;
+    top: calc(50% - 25px);
+    left: calc(50% - 25px);
 }
