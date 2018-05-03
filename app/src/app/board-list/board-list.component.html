@@ -21,7 +21,7 @@
                 <!-- <mat-list-item *ngFor="let stop of viewPortItems"> -->
                 <mat-divider></mat-divider>
                 <p matLine>{{stop.name}}</p>
-                <a mat-icon-button [routerLink]="['/','stop', stop.groupId]">
+                <a mat-icon-button [routerLink]="['/','stop', stop.groupId]" attr.aria-label="Go to {{stop.name}} board view">
                     <mat-icon>navigate_next</mat-icon>
                 </a>
             </mat-list-item>
