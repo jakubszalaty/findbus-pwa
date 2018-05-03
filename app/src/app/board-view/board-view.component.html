@@ -19,8 +19,8 @@
 
     </agm-map>
 </div>
-
-<div class="panel-states">
+<div class="spacer"></div>
+<div class="panel-states mat-elevation-z2" *ngIf="stopsList && stopsList.length">
 
     <mat-card *ngFor="let stop of stopsList" class="panel-state-card" [@fadeInAnimation]>
         <mat-card-title>
