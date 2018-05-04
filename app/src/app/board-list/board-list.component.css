@@ -32,7 +32,7 @@
 
 @media (min-width: 840px) {
     .search-form {
-        margin: 0 16px;
+        margin: 8px 16px 0;
         /* left: 0;
         width: auto;
         right: 15px; */
@@ -62,7 +62,6 @@
     /* padding-top: 53.5px; */
     position: relative;
 }
-
 
 .item-list mat-list-item {
     background: #fff;
