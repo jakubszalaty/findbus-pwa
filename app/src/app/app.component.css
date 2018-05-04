@@ -57,10 +57,14 @@
 
 @media (min-width: 1024px) {
     /* tymczasowo */
-    .bottom-bar{
+    .bottom-bar {
         display: none;
     }
     .bottom-bar mat-toolbar-row {
         width: calc(100% - 256px);
     }
+}
+
+[mat-list-item][disabled] {
+    color: rgba(0, 0, 0, .26);
 }
