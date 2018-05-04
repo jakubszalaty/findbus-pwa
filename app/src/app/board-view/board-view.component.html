@@ -38,22 +38,26 @@
             <mat-list dense>
                 <mat-list-item>
                     <div class="list-row">
-                        <span>Line</span>
-                        <span>Destination</span>
-                        <span>Arrival</span>
+                        <span class="line">Line</span>
+                        <span class="direction">Destination</span>
+                        <span class="arrival">Arrival</span>
+                    </div>
+                </mat-list-item>
+                <mat-list-item *ngIf="!stop.departures || !stop.departures.length">
+                    <div class="list-row">
+                        <span class="info">No departures</span>
                     </div>
                 </mat-list-item>
                 <mat-list-item *ngFor="let departures of stop.departures">
                     <div class="list-row">
-                        <span>{{departures.line}}</span>
-                        <span>{{departures.direction}}</span>
-                        <span>{{departures.status}}</span>
-                        <!-- <span>
-                                <mat-icon *ngIf="busInfo.OnStop">directions_bus</mat-icon>
-                                <span *ngIf="!busInfo.OnStop">
-                                    <span *ngIf="busInfo.FromSchedule">~</span>{{busInfo.Arrival}}m
-                                </span>
-                            </span> -->
+                        <span class="line">{{departures.line}}</span>
+                        <span class="direction">{{departures.direction}}</span>
+                        <span class="arrival">
+                            <mat-icon *ngIf="departures.onStop">directions_bus</mat-icon>
+                            <span *ngIf="!departures.onStop">
+                                <span *ngIf="departures.isApprox">~</span>{{departures.arrival}}
+                            </span>
+                        </span>
 
                     </div>
                 </mat-list-item>

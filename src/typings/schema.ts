@@ -64,7 +64,9 @@ export interface StopWithDepartures {
 export interface Departure {
   line?: string | null; 
   direction?: string | null; 
-  status?: string | null; 
+  arrival?: string | null; 
+  onStop?: boolean | null; 
+  isApprox?: boolean | null; 
 }
 /* Input for search verhicles */
 export interface VehiclesWhereInput {

@@ -50,12 +50,28 @@ export class StopService {
                 return null
             }
 
-            const data = [...dom.window.document.querySelectorAll('tbody tr')].map((v) => ({
-                line: v.children[0].textContent,
-                direction: v.children[1].textContent,
-                status: v.children[2].textContent,
-            }))
-            return data
+            const parseReciveData = R.map(
+                R.pipe(
+                    (v: any) => ({
+                        line: v.children[0].textContent,
+                        direction: v.children[1].textContent,
+                        arrival: v.children[2].textContent,
+                    }),
+                    R.converge(R.merge, [
+                        R.identity,
+                        R.pipe(R.prop('arrival'), (v) => {
+                            const onStop = !!v.match('>>>')
+                            const isApprox = !!v.match('za')
+                            return {
+                                arrival: v.replace('za', '').trim(),
+                                onStop,
+                                isApprox,
+                            }
+                        }),
+                    ])
+                )
+            )
+            return parseReciveData([...dom.window.document.querySelectorAll('tbody tr')])
         } catch (error) {
             return error
         }

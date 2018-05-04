@@ -59,7 +59,9 @@ input VehicleWhereInput {
 type Departure {
     line: String
     direction: String
-    status: String
+    arrival: String
+    onStop: Boolean
+    isApprox: Boolean
 }
 type Stop {
     id: Int

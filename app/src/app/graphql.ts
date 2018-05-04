@@ -89,7 +89,9 @@ export const STOPS_WITH_DEPARTURES_QUERY = gql`
             departures {
                 line
                 direction
-                status
+                arrival
+                onStop
+                isApprox
             }
         }
     }

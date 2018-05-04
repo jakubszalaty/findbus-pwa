@@ -63,11 +63,28 @@ agm-map {
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 .list-row span {
     font-size: 16px;
+}
+
+.list-row .line {
+    flex: 1;
+}
+
+.list-row .direction {
+    flex: 3;
+}
+
+.list-row .arrival {
+    flex: 1;
+    text-align: center;
+}
+.list-row .info {
+    flex: 1;
+    text-align: center;
 }
 
 .panel-state-card mat-card-title {
