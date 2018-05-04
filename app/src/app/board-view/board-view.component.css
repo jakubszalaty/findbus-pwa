@@ -33,9 +33,10 @@ agm-map {
     z-index: 9;
 }
 
-.spacer{
+.spacer {
     height: 45vh;
 }
+
 .panel-states::after {
     content: "";
     width: calc(33% - 8px);
@@ -75,4 +76,11 @@ agm-map {
     flex-direction: row;
     justify-content: space-between;
     font-size: 16px;
+}
+
+mat-progress-spinner {
+    position: absolute;
+    z-index: 1;
+    top: calc(50% - 25px + 22.5vh);
+    left: calc(50% - 25px);
 }

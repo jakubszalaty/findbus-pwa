@@ -15,10 +15,9 @@
         [disableDefaultUI]="true">
 
         <!-- <agm-marker [latitude]="userLat" [longitude]="userLng"></agm-marker> -->
-        <!-- TODO: cos sie nie wyswietla moze trzeba odswierzyc czy cos -->
         <agm-marker *ngFor="let stop of stopsList" [latitude]="getNumber(stop.lat)" [longitude]="getNumber(stop.lnt)" (markerClick)="selectStop(stop)">
             <agm-info-window>
-                {{stop.groupId}}{{stop.columnId}}
+                <p>{{stop.groupId}}{{stop.columnId}}</p>
                 <button mat-fab color="accent">
                     <mat-icon>add</mat-icon>
                 </button>
@@ -66,7 +65,7 @@
     </mat-card>
 
 </div>
-
+<mat-progress-spinner *ngIf="loading" mode="indeterminate" diameter="50"></mat-progress-spinner>
 <!-- <div class="main-fab">
     <button mat-fab color="accent" (click)="createPresentation()">
         <mat-icon>add</mat-icon>
