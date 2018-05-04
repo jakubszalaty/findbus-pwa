@@ -106,7 +106,10 @@ export class BoardViewComponent implements OnInit, OnDestroy {
         return Number(v)
     }
     scroll(stopId, $infoWindow: AgmInfoWindow) {
-        this.panelStates.nativeElement.querySelector(`#stop-card-${stopId}`).scrollIntoView()
+        const stopCard = this.panelStates.nativeElement.querySelector(`#stop-card-${stopId}`)
+        stopCard.scrollIntoView()
+        stopCard.classList.add('selected')
+        setTimeout(() => stopCard.classList.remove('selected'), 500)
         $infoWindow.close()
         // this.target.nativeElement.querySelector(`#stop-card-${stopId}`)
         // debugger
