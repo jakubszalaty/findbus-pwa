@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core'
 import { Apollo } from 'apollo-angular'
 import { ActivatedRoute, Router } from '@angular/router'
 
@@ -14,7 +14,7 @@ import { ApolloQueryResult } from 'apollo-client'
 import { StopsWithDeparturesQueryResponse, STOPS_WITH_DEPARTURES_QUERY } from '../graphql'
 import { Subscription } from 'rxjs/Subscription'
 import { fadeInAnimation } from '../animations/fade-in.animation'
-import { LatLngBoundsLiteral, GoogleMapsAPIWrapper } from '@agm/core'
+import { LatLngBoundsLiteral, GoogleMapsAPIWrapper, AgmInfoWindow } from '@agm/core'
 
 import * as R from 'ramda'
 
@@ -36,6 +36,8 @@ export class BoardViewComponent implements OnInit, OnDestroy {
     zoom = 16
     userLat = 53.4461311
     userLng = 14.49227
+
+    @ViewChild('panelStates') panelStates: ElementRef
 
     constructor(
         private apollo: Apollo,
@@ -86,9 +88,6 @@ export class BoardViewComponent implements OnInit, OnDestroy {
             }
         }
     }
-    selectStop(stop) {
-        console.log(stop)
-    }
 
     findStopCenter() {
         const getCenter = (v, init) =>
@@ -105,5 +104,14 @@ export class BoardViewComponent implements OnInit, OnDestroy {
     }
     getNumber(v: string) {
         return Number(v)
+    }
+    scroll(stopId, $infoWindow: AgmInfoWindow) {
+        this.panelStates.nativeElement.querySelector(`#stop-card-${stopId}`).scrollIntoView()
+        $infoWindow.close()
+        // this.target.nativeElement.querySelector(`#stop-card-${stopId}`)
+        // debugger
+        // debugger
+        // this.target.nativeElement.scrollIntoView()
+        // el.scrollIntoView()
     }
 }
