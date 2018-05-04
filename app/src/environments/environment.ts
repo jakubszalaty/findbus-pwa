@@ -8,4 +8,5 @@ export const environment = {
     serverUri: 'https://zditm-graphql.test',
     serverApiUri: 'https://zditm-graphql.test/graphql',
     serverApiWebsocketUri: 'wss://ws-zditm-graphql.test/subscriptions',
+    googleMapsApiKey: 'AIzaSyDeJ3Rsxjqf4IqgSZcZQ03ZX_y3CwkkY3w'
 }

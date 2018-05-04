@@ -6,6 +6,7 @@
         "prestart": "yarn install",
         "ng": "ng",
         "start": "ng serve --host 0.0.0.0 --disable-host-check",
+        "prebuild": "envsubst < ./src/environments/environment.prod.ts-temp > ./src/environments/environment.prod.ts",
         "build": "ng build --prod",
         "test": "ng test",
         "lint": "ng lint",

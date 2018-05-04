@@ -85,7 +85,7 @@ import { BoardViewComponent } from './board-view/board-view.component'
         VirtualScrollModule,
         // Google maps
         AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyADqXf8Cw_37HRnrcyeLznjKGsBSn0u5uw',
+            apiKey: environment.googleMapsApiKey,
         }),
         MatAutocompleteModule,
         MatButtonModule,
