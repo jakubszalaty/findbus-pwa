@@ -12,6 +12,7 @@ import { timer } from 'rxjs/observable/timer'
 import 'rxjs/add/operator/switchMap'
 import 'rxjs/add/operator/debounce'
 import { fadeInAnimation } from '../animations/fade-in.animation'
+import { HeaderService } from '../header/header.service'
 
 @Component({
     selector: 'app-board-list',
@@ -26,13 +27,16 @@ export class BoardListComponent implements OnInit {
     listFilter: string
     viewPortItems: Stop[]
 
-    constructor(private apollo: Apollo, fb: FormBuilder) {
+    constructor(private apollo: Apollo, fb: FormBuilder, private headerService: HeaderService) {
         this.searchForm = fb.group({
             searchText: '',
         })
     }
 
     ngOnInit() {
+        this.headerService.setMenuMode()
+        this.headerService.setMenuTitle('Find bus - boards list')
+
         const stopsQuery = this.apollo.watchQuery<StopsQueryResponse>({
             query: STOPS_QUERY,
         }).valueChanges

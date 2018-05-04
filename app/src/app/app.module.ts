@@ -55,6 +55,7 @@ import { OrderByPipe } from './pipes/order-by.pipe'
 import { StopsFilter } from './pipes/stops-filter.pipe'
 
 import { SidenavService } from './sidenav/sidenav.service'
+import { HeaderService } from './header/header.service'
 
 import { WindowRef } from './windowRef/windowRef'
 import { VirtualScrollModule } from 'angular2-virtual-scroll'
@@ -121,7 +122,7 @@ import { BoardViewComponent } from './board-view/board-view.component'
         environment.production ? ServiceWorkerModule.register('ngsw-worker.js') : [],
         ClipboardModule,
     ],
-    providers: [SidenavService, WindowRef, ShareService],
+    providers: [SidenavService, HeaderService, WindowRef, ShareService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

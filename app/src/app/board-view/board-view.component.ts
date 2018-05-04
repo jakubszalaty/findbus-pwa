@@ -17,6 +17,7 @@ import { fadeInAnimation } from '../animations/fade-in.animation'
 import { LatLngBoundsLiteral, GoogleMapsAPIWrapper, AgmInfoWindow } from '@agm/core'
 
 import * as R from 'ramda'
+import { HeaderService } from '../header/header.service'
 
 @Component({
     selector: 'app-board-view',
@@ -43,10 +44,13 @@ export class BoardViewComponent implements OnInit, OnDestroy {
         private apollo: Apollo,
         private route: ActivatedRoute,
         private router: Router,
-        private googleMapsAPIWrapper: GoogleMapsAPIWrapper
+        private googleMapsAPIWrapper: GoogleMapsAPIWrapper,
+        private headerService: HeaderService
     ) {}
 
     ngOnInit() {
+        this.headerService.setArrowBackMode(['/'])
+        this.headerService.setMenuTitle('')
         // zamienic na observable
         // if (navigator.geolocation) {
         //     navigator.geolocation.getCurrentPosition((position) => {
@@ -76,6 +80,7 @@ export class BoardViewComponent implements OnInit, OnDestroy {
         const querySubscription = stopsWithDeparturesQuery.subscribe((response) => {
             this.loading = false
             this.stopsList = response.data.stopsWithDepartures
+            this.headerService.setMenuTitle(this.stopsList[0].name)
             this.findStopCenter()
         })
 
