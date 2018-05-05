@@ -37,6 +37,7 @@ export class BoardViewComponent implements OnInit, OnDestroy {
     zoom = 16
     userLat = 53.4461311
     userLng = 14.49227
+    iconSet: any = {}
 
     @ViewChild('panelStates') panelStates: ElementRef
 
@@ -115,11 +116,33 @@ export class BoardViewComponent implements OnInit, OnDestroy {
         stopCard.scrollIntoView()
         stopCard.classList.add('selected')
         setTimeout(() => stopCard.classList.remove('selected'), 500)
-        $infoWindow.close()
+        if ($infoWindow) {
+            $infoWindow.close()
+        }
         // this.target.nativeElement.querySelector(`#stop-card-${stopId}`)
         // debugger
         // debugger
         // this.target.nativeElement.scrollIntoView()
         // el.scrollIntoView()
+    }
+    getIconUrl(name: string) {
+        if (this.iconSet[name]) {
+            return this.iconSet[name]
+        }
+        const canvas = document.createElement('canvas')
+        canvas.width = 50
+        canvas.height = 20
+        const ctx = canvas.getContext('2d')
+        ctx.fillStyle = 'rgba(10, 175, 249, 0.7)'
+        ctx.fillRect(0, 0, canvas.width, canvas.height)
+        ctx.font = '12px Arial'
+        ctx.fillStyle = 'rgb(255,255,255)'
+        ctx.textAlign = 'center'
+        ctx.textBaseline = 'middle'
+        ctx.fillText(name, canvas.width / 2, canvas.height / 2)
+        const url = canvas.toDataURL()
+        console.log(url)
+        this.iconSet[name] = url
+        return this.iconSet[name]
     }
 }

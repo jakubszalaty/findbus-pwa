@@ -15,11 +15,12 @@
         [disableDefaultUI]="true">
 
         <!-- <agm-marker [latitude]="userLat" [longitude]="userLng"></agm-marker> -->
-        <agm-marker *ngFor="let stop of stopsList" [latitude]="getNumber(stop.lat)" [longitude]="getNumber(stop.lnt)">
-            <agm-info-window #infoWindow>
-                <p>Stop: {{stop.groupId}}{{stop.columnId}}</p>
-                <button mat-button (click)="scroll(stop.id, infoWindow)">Show</button>
-            </agm-info-window>
+        <agm-marker *ngFor="let stop of stopsList" [latitude]="getNumber(stop.lat)" [longitude]="getNumber(stop.lnt)" [iconUrl]="{url:getIconUrl(stop.groupId+''+stop.columnId), scaledSize: { width: 50, height: 20 }}" (markerClick)="scroll(stop.id)" >
+            <!-- <agm-info-window #infoWindow> -->
+                <!-- <p>Stop: {{stop.groupId}}{{stop.columnId}}</p> -->
+                <!-- <button mat-button (click)="scroll(stop.id, infoWindow)">Show</button> -->
+                <!-- <button mat-button (click)="">Icon</button> -->
+            <!-- </agm-info-window> -->
         </agm-marker>
 
     </agm-map>
