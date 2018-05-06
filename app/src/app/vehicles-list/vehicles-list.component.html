@@ -1,6 +1,9 @@
 <div class="map-outer">
   <agm-map *ngIf="vehiclesList && vehiclesList.length" [latitude]="lat" [longitude]="lng" [zoom]="zoom" [clickableIcons]="false"
     [disableDefaultUI]="true">
+
+    <agm-marker *ngFor="let vehicle of vehiclesList" [latitude]="getNumber(vehicle.lat)" [longitude]="getNumber(vehicle.lnt)"
+      [iconUrl]="{url:getIconUrl(vehicle.line), scaledSize: { width: 50, height: 20 }}"></agm-marker>
   </agm-map>
 </div>
 
@@ -21,13 +24,10 @@
 
 
   <mat-list class="item-list">
-    <virtual-scroll [items]="vehiclesList | vehiclesFilter:listFilter" (update)="viewPortItems = $event">
+    <virtual-scroll [items]="lineList | vehiclesFilter:listFilter" (update)="viewPortItems = $event">
       <mat-list-item *ngFor="let vehicle of viewPortItems">
         <mat-divider></mat-divider>
         <p matLine>{{vehicle.line}}</p>
-        <a mat-icon-button [routerLink]="['/','vehicle', vehicle.line]" attr.aria-label="Go to {{vehicle.line}} vehicle view">
-          <mat-icon>navigate_next</mat-icon>
-        </a>
       </mat-list-item>
     </virtual-scroll>
   </mat-list>

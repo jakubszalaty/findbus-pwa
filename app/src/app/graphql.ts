@@ -104,8 +104,18 @@ export interface StopsWithDeparturesQueryResponse {
 export const VEHICLES_QUERY = gql`
     query vehicles {
         vehicles {
+            gmvid
             id
             line
+            squad
+            line
+            vehicleId
+            from
+            to
+            lat
+            lnt
+            speed
+            timeNumber
         }
     }
 `

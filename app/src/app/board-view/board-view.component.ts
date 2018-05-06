@@ -64,6 +64,7 @@ export class BoardViewComponent implements OnInit, OnDestroy {
         this.groupId$ = this.route.paramMap.map((params) => {
             return Number(params.get('groupId'))
         })
+
         const getQuery = (variables): Observable<ApolloQueryResult<StopsWithDeparturesQueryResponse>> => {
             const query = this.apollo.watchQuery<StopsWithDeparturesQueryResponse>({
                 query: STOPS_WITH_DEPARTURES_QUERY,

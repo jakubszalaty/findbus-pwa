@@ -18,6 +18,7 @@ import { Subscription } from 'rxjs/Subscription'
 export class VehiclesListComponent implements OnInit, OnDestroy {
     loading = true
     vehiclesList: Vehicle[]
+    lineList: Vehicle[]
 
     searchForm: FormGroup
     listFilter: string
@@ -27,6 +28,8 @@ export class VehiclesListComponent implements OnInit, OnDestroy {
     lat = 53.4461311
     lng = 14.49227
     zoom = 16
+
+    iconSet: any = {}
 
     constructor(private apollo: Apollo, fb: FormBuilder, private headerService: HeaderService) {
         this.searchForm = fb.group({
@@ -38,13 +41,21 @@ export class VehiclesListComponent implements OnInit, OnDestroy {
         this.headerService.setMenuMode()
         this.headerService.setMenuTitle('Find bus - list of vehicles')
 
-        const vehiclesQuery = this.apollo.watchQuery<VehiclesQueryResponse>({
-            query: VEHICLES_QUERY,
-        }).valueChanges
+        const getVehiclesQuery = () => {
+            const query = this.apollo.watchQuery<VehiclesQueryResponse>({
+                query: VEHICLES_QUERY,
+            })
+            // refetch co 30s
+            query.startPolling(1000 * 30)
+
+            return query.valueChanges
+        }
+        const vehiclesQuery = getVehiclesQuery()
 
         const querySubscription = vehiclesQuery.subscribe((response) => {
             this.loading = false
-            this.vehiclesList = R.pipe(
+            this.vehiclesList = response.data.vehicles
+            this.lineList = R.pipe(
                 R.uniqBy(R.prop('line')),
                 R.sortBy(R.pipe(R.prop('line'), (v) => Number(v) || Infinity))
             )(response.data.vehicles)
@@ -73,5 +84,28 @@ export class VehiclesListComponent implements OnInit, OnDestroy {
     clearSearchText() {
         this.searchForm.setValue({ searchText: '' })
         this.listFilter = ''
+    }
+    getNumber(v: string) {
+        return Number(v)
+    }
+    getIconUrl(name: string) {
+        if (this.iconSet[name]) {
+            return this.iconSet[name]
+        }
+        const canvas = document.createElement('canvas')
+        canvas.width = 50
+        canvas.height = 20
+        const ctx = canvas.getContext('2d')
+        ctx.fillStyle = 'rgba(10, 175, 249, 0.7)'
+        ctx.fillRect(0, 0, canvas.width, canvas.height)
+        ctx.font = '12px Arial'
+        ctx.fillStyle = 'rgb(255,255,255)'
+        ctx.textAlign = 'center'
+        ctx.textBaseline = 'middle'
+        ctx.fillText(name, canvas.width / 2, canvas.height / 2)
+        const url = canvas.toDataURL()
+        console.log(url)
+        this.iconSet[name] = url
+        return this.iconSet[name]
     }
 }
