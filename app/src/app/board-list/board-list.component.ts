@@ -35,7 +35,7 @@ export class BoardListComponent implements OnInit {
 
     ngOnInit() {
         this.headerService.setMenuMode()
-        this.headerService.setMenuTitle('Find bus - boards list')
+        this.headerService.setMenuTitle('Find bus - list of boards')
 
         const stopsQuery = this.apollo.watchQuery<StopsQueryResponse>({
             query: STOPS_QUERY,
