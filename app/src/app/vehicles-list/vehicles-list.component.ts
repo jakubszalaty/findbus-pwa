@@ -8,6 +8,8 @@ import { VehiclesQueryResponse, VEHICLES_QUERY } from '../graphql'
 import { fadeInAnimation } from '../animations/fade-in.animation'
 import { timer } from 'rxjs/observable/timer'
 import { Subscription } from 'rxjs/Subscription'
+import { Observable } from 'rxjs/Observable'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
     selector: 'app-vehicles-list',
@@ -30,7 +32,14 @@ export class VehiclesListComponent implements OnInit, OnDestroy {
 
     iconSet: any = {}
 
-    constructor(private apollo: Apollo, private headerService: HeaderService) {}
+    line$: Observable<string>
+    line: string
+
+    constructor(
+        private apollo: Apollo,
+        private route: ActivatedRoute,
+        private headerService: HeaderService
+    ) {}
 
     ngOnInit() {
         this.headerService.setMenuMode()
@@ -56,7 +65,14 @@ export class VehiclesListComponent implements OnInit, OnDestroy {
             )(response.data.vehicles)
         })
 
-        this.subscriptions = [...this.subscriptions, querySubscription]
+        this.line$ = this.route.paramMap.map((params) => params.get('line'))
+
+        const lineSubscribe = this.line$.distinctUntilChanged().subscribe((v) => {
+            console.log(v)
+            this.line = v
+        })
+
+        this.subscriptions = [...this.subscriptions, querySubscription, lineSubscribe]
     }
 
     ngOnDestroy(): void {

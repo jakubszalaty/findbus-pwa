@@ -4,7 +4,7 @@
     position: relative;
 }
 
-.item-list mat-list-item {
+.item-list .item-elem {
     background: #fff;
     width: 25%;
     display: inline-block;

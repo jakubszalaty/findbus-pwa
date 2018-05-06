@@ -2,7 +2,7 @@
   <agm-map *ngIf="vehiclesList && vehiclesList.length" [latitude]="lat" [longitude]="lng" [zoom]="zoom" [clickableIcons]="false"
     [disableDefaultUI]="true">
 
-    <agm-marker *ngFor="let vehicle of vehiclesList" [latitude]="getNumber(vehicle.lat)" [longitude]="getNumber(vehicle.lnt)"
+    <agm-marker *ngFor="let vehicle of vehiclesList | vehiclesFilter:line" [latitude]="getNumber(vehicle.lat)" [longitude]="getNumber(vehicle.lnt)"
       [iconUrl]="{url:getIconUrl(vehicle.line), scaledSize: { width: 50, height: 20 }}"></agm-marker>
   </agm-map>
 </div>
@@ -10,9 +10,10 @@
 <div [@fadeInAnimation]>
   <mat-list class="item-list">
     <virtual-scroll [items]="lineList" (update)="viewPortItems = $event">
-      <mat-list-item *ngFor="let vehicle of viewPortItems">
+      <a class="item-elem" mat-list-item [routerLink]="['/','vehicles', vehicle.line]" attr.aria-label="Show line: {{vehicle.line}}"
+        *ngFor="let vehicle of viewPortItems">
         <p matLine>{{vehicle.line}}</p>
-      </mat-list-item>
+      </a>
     </virtual-scroll>
   </mat-list>
 

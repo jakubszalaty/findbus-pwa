@@ -3,17 +3,10 @@ import { Vehicle } from '../../schema-types'
 
 @Pipe({ name: 'vehiclesFilter' })
 export class VehiclesFilter implements PipeTransform {
-    transform(vehicles: Vehicle[], searchText: any): any {
-        if (searchText == null || !vehicles) {
+    transform(vehicles: Vehicle[], line: string): any {
+        if (line === null || line === 'all' || !vehicles) {
             return vehicles
         }
-        return vehicles.filter((stop) => {
-            return (
-                stop.line
-                    .toLowerCase()
-                    .trim()
-                    .indexOf(searchText.toLowerCase().trim()) > -1
-            )
-        })
+        return vehicles.filter((vehicle) => vehicle.line === line)
     }
 }

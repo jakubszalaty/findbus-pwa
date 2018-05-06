@@ -14,7 +14,7 @@ const routes: Routes = [
         pathMatch: 'full',
     },
     {
-        path: 'vehicles',
+        path: 'vehicles/:line',
         component: VehiclesListComponent,
         pathMatch: 'full',
     },

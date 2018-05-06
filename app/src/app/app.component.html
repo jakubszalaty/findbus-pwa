@@ -15,7 +15,7 @@
                 <mat-icon mat-list-icon>list</mat-icon>
                 <p mat-line>Boards list</p>
             </a>
-            <a mat-list-item (click)="goTo('/vehicles')" aria-label="Go to Buses positions">
+            <a mat-list-item (click)="goTo('/vehicles/all')" aria-label="Go to Buses positions">
                 <mat-icon mat-list-icon>directions_bus</mat-icon>
                 <p mat-line>Buses positions</p>
             </a>
@@ -56,7 +56,7 @@
                         </a>
                     </span>
                     <span>
-                        <a mat-icon-button [routerLink]="['/','vehicles']" [color]="false ? 'primary' : null" aria-label="Go to Buses positions">
+                        <a mat-icon-button [routerLink]="['/','vehicles','all']" [color]="false ? 'primary' : null" aria-label="Go to Buses positions">
                             <mat-icon>directions_bus</mat-icon>
                         </a>
                     </span>
