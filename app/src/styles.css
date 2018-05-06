@@ -39,3 +39,8 @@
 .search-form mat-form-field .mat-form-field-wrapper {
     padding-bottom: 0.5em;
 }
+
+/* overide for bug with cdk-focused */
+.disabled-cdk-focused .mat-button-focus-overlay {
+    display: none;
+}

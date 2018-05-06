@@ -6,7 +6,7 @@
       </button>
     </span> -->
     <span>
-      <button mat-icon-button (click)="openSidenav()" *ngIf="isMenuButtonVisible && iconStatus =='menu'">
+      <button class="disabled-cdk-focused" mat-icon-button (click)="openSidenav()" *ngIf="isMenuButtonVisible && iconStatus =='menu'">
         <mat-icon>menu</mat-icon>
       </button>
       <button mat-icon-button [routerLink]="routeUrl" *ngIf="iconStatus =='back'">
