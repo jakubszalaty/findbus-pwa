@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { Stop } from '../schema-types'
+import { Stop, Vehicle } from '../schema-types'
 
 // export const DELETE_RESOURCE_FILE = gql`
 //     mutation($where: ResourceWhereUniqueInput!) {
@@ -98,5 +98,18 @@ export const STOPS_WITH_DEPARTURES_QUERY = gql`
 `
 export interface StopsWithDeparturesQueryResponse {
     stopsWithDepartures: Stop[]
+    loading: boolean
+}
+
+export const VEHICLES_QUERY = gql`
+    query vehicles {
+        vehicles {
+            id
+            line
+        }
+    }
+`
+export interface VehiclesQueryResponse {
+    vehicles: Vehicle[]
     loading: boolean
 }

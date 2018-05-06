@@ -1,33 +1,32 @@
 import * as R from 'ramda'
-import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core'
-import { Apollo } from 'apollo-angular'
-
-import { FormBuilder, FormGroup } from '@angular/forms'
-import { STOPS_QUERY, StopsQueryResponse } from '../graphql'
-import { ApolloQueryResult } from 'apollo-client'
-
-import { Stop } from '../../schema-types'
-import { Observable } from 'rxjs/Observable'
-import { timer } from 'rxjs/observable/timer'
-import 'rxjs/add/operator/switchMap'
-import 'rxjs/add/operator/debounce'
-import { fadeInAnimation } from '../animations/fade-in.animation'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { HeaderService } from '../header/header.service'
-import { Subscription } from 'apollo-client/util/Observable'
+import { FormBuilder, FormGroup } from '@angular/forms'
+import { Apollo } from 'apollo-angular'
+import { Vehicle } from '../../schema-types'
+import { VehiclesQueryResponse, VEHICLES_QUERY } from '../graphql'
+import { fadeInAnimation } from '../animations/fade-in.animation'
+import { timer } from 'rxjs/observable/timer'
+import { Subscription } from 'rxjs/Subscription'
 
 @Component({
-    selector: 'app-board-list',
-    templateUrl: './board-list.component.html',
-    styleUrls: ['./board-list.component.css'],
+    selector: 'app-vehicles-list',
+    templateUrl: './vehicles-list.component.html',
+    styleUrls: ['./vehicles-list.component.css'],
     animations: [fadeInAnimation],
 })
-export class BoardListComponent implements OnInit, OnDestroy {
+export class VehiclesListComponent implements OnInit, OnDestroy {
     loading = true
-    stopsList: Stop[]
+    vehiclesList: Vehicle[]
+
     searchForm: FormGroup
     listFilter: string
-    viewPortItems: Stop[]
+    viewPortItems: Vehicle[]
     subscriptions: Subscription[] = []
+
+    lat = 53.4461311
+    lng = 14.49227
+    zoom = 16
 
     constructor(private apollo: Apollo, fb: FormBuilder, private headerService: HeaderService) {
         this.searchForm = fb.group({
@@ -37,16 +36,21 @@ export class BoardListComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.headerService.setMenuMode()
-        this.headerService.setMenuTitle('Find bus - list of boards')
+        this.headerService.setMenuTitle('Find bus - list of vehicles')
 
-        const stopsQuery = this.apollo.watchQuery<StopsQueryResponse>({
-            query: STOPS_QUERY,
+        const vehiclesQuery = this.apollo.watchQuery<VehiclesQueryResponse>({
+            query: VEHICLES_QUERY,
         }).valueChanges
 
-        const querySubscription = stopsQuery.subscribe((response) => {
+        const querySubscription = vehiclesQuery.subscribe((response) => {
             this.loading = false
-            this.stopsList = R.pipe(R.uniqBy(R.prop('name')), R.sortBy(R.prop('name')))(response.data.stops)
+            this.vehiclesList = R.pipe(
+                R.uniqBy(R.prop('line')),
+                R.sortBy(R.pipe(R.prop('line'), (v) => Number(v) || Infinity))
+            )(response.data.vehicles)
         })
+
+        this.subscriptions = [...this.subscriptions, querySubscription]
 
         const searchSubscription = this.searchForm.valueChanges
             .distinctUntilChanged()
@@ -57,6 +61,7 @@ export class BoardListComponent implements OnInit, OnDestroy {
 
         this.subscriptions = [...this.subscriptions, querySubscription, searchSubscription]
     }
+
     ngOnDestroy(): void {
         for (const sub of this.subscriptions) {
             if (sub && sub.unsubscribe) {

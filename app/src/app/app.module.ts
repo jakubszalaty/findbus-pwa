@@ -53,6 +53,7 @@ import { AppRoutingModule } from './app.routing'
 
 import { OrderByPipe } from './pipes/order-by.pipe'
 import { StopsFilter } from './pipes/stops-filter.pipe'
+import { VehiclesFilter } from './pipes/vehicles-filter.pipe'
 
 import { SidenavService } from './sidenav/sidenav.service'
 import { HeaderService } from './header/header.service'
@@ -62,6 +63,7 @@ import { VirtualScrollModule } from 'angular2-virtual-scroll'
 import { ShareService } from './share/share.service'
 import { BoardListComponent } from './board-list/board-list.component'
 import { BoardViewComponent } from './board-view/board-view.component'
+import { VehiclesListComponent } from './vehicles-list/vehicles-list.component'
 
 @NgModule({
     declarations: [
@@ -71,6 +73,8 @@ import { BoardViewComponent } from './board-view/board-view.component'
         HeaderComponent,
         OrderByPipe,
         StopsFilter,
+        VehiclesFilter,
+        VehiclesListComponent,
     ],
     imports: [
         BrowserModule,

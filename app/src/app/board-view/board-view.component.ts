@@ -35,6 +35,7 @@ export class BoardViewComponent implements OnInit, OnDestroy {
     lat = 53.4461311
     lng = 14.49227
     zoom = 16
+
     userLat = 53.4461311
     userLng = 14.49227
     iconSet: any = {}

@@ -1,41 +1,47 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { BoardListComponent } from './board-list/board-list.component'
-import { BoardViewComponent } from './board-view/board-view.component';
+import { BoardViewComponent } from './board-view/board-view.component'
+import { VehiclesListComponent } from './vehicles-list/vehicles-list.component'
 
 /**
  * Setup all routes here
  */
 const routes: Routes = [
-  {
-    path: '',
-    component: BoardListComponent,
-    pathMatch: 'full',
-  },
-  {
-    path: 'stop/:groupId',
-    component: BoardViewComponent,
-    pathMatch: 'full',
-  },
+    {
+        path: '',
+        component: BoardListComponent,
+        pathMatch: 'full',
+    },
+    {
+        path: 'vehicles',
+        component: VehiclesListComponent,
+        pathMatch: 'full',
+    },
+    {
+        path: 'stop/:groupId',
+        component: BoardViewComponent,
+        pathMatch: 'full',
+    },
 
-  // {
-  //     path: '',
-  //     pathMatch: 'full',
-  //     redirectTo: '/presentations/1',
-  // },
-  // {
-  //     path: 'presentations/:page',
-  //     component: PresentationListComponent,
-  //     pathMatch: 'full',
-  // },
-  {
-    path: '**',
-    redirectTo: '',
-  },
+    // {
+    //     path: '',
+    //     pathMatch: 'full',
+    //     redirectTo: '/presentations/1',
+    // },
+    // {
+    //     path: 'presentations/:page',
+    //     component: PresentationListComponent,
+    //     pathMatch: 'full',
+    // },
+    {
+        path: '**',
+        redirectTo: '',
+    },
 ]
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule],
 })
 export class AppRoutingModule {}
