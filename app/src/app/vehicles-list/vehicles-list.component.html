@@ -8,25 +8,9 @@
 </div>
 
 <div [@fadeInAnimation]>
-  <div class="search-form mat-elevation-z2">
-    <form [formGroup]="searchForm">
-      <mat-form-field floatLabel="never">
-        <span matPrefix>
-          <mat-icon class="search-icon">search</mat-icon>
-        </span>
-        <input matInput placeholder="Search" formControlName="searchText" autocomplete="off">
-        <span class="pointer-cursor" matSuffix *ngIf="searchForm.value.searchText" (click)="clearSearchText()">
-          <mat-icon class="search-icon">clear</mat-icon>
-        </span>
-      </mat-form-field>
-    </form>
-  </div>
-
-
   <mat-list class="item-list">
-    <virtual-scroll [items]="lineList | vehiclesFilter:listFilter" (update)="viewPortItems = $event">
+    <virtual-scroll [items]="lineList" (update)="viewPortItems = $event">
       <mat-list-item *ngFor="let vehicle of viewPortItems">
-        <mat-divider></mat-divider>
         <p matLine>{{vehicle.line}}</p>
       </mat-list-item>
     </virtual-scroll>

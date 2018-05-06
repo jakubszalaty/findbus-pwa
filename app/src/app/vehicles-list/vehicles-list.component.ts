@@ -20,7 +20,6 @@ export class VehiclesListComponent implements OnInit, OnDestroy {
     vehiclesList: Vehicle[]
     lineList: Vehicle[]
 
-    searchForm: FormGroup
     listFilter: string
     viewPortItems: Vehicle[]
     subscriptions: Subscription[] = []
@@ -31,11 +30,7 @@ export class VehiclesListComponent implements OnInit, OnDestroy {
 
     iconSet: any = {}
 
-    constructor(private apollo: Apollo, fb: FormBuilder, private headerService: HeaderService) {
-        this.searchForm = fb.group({
-            searchText: '',
-        })
-    }
+    constructor(private apollo: Apollo, private headerService: HeaderService) {}
 
     ngOnInit() {
         this.headerService.setMenuMode()
@@ -62,15 +57,6 @@ export class VehiclesListComponent implements OnInit, OnDestroy {
         })
 
         this.subscriptions = [...this.subscriptions, querySubscription]
-
-        const searchSubscription = this.searchForm.valueChanges
-            .distinctUntilChanged()
-            .debounce(() => timer(100))
-            .subscribe((data) => {
-                this.listFilter = R.has('searchText', data) ? data.searchText : this.listFilter
-            })
-
-        this.subscriptions = [...this.subscriptions, querySubscription, searchSubscription]
     }
 
     ngOnDestroy(): void {
@@ -81,10 +67,6 @@ export class VehiclesListComponent implements OnInit, OnDestroy {
         }
     }
 
-    clearSearchText() {
-        this.searchForm.setValue({ searchText: '' })
-        this.listFilter = ''
-    }
     getNumber(v: string) {
         return Number(v)
     }

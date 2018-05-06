@@ -1,24 +1,3 @@
-.list-card {
-    margin: 16px;
-}
-
-@media (min-width: 840px) {
-    .list-card {
-        width: calc(100vw - 48px - 64px - 112px);
-        margin: 16px auto 0;
-    }
-    .list-card .mat-card-content {
-        min-height: 400px;
-    }
-}
-
-@media (min-width: 1024px) {
-    .list-card {
-        width: calc(100vw - 48px - 64px - 112px - 256px);
-        max-width: calc(1360px - 48px - 64px - 112px - 256px);
-    }
-}
-
 .search-form {
     background: #fff;
     padding: 0 16px;

@@ -1,48 +1,3 @@
-.list-card {
-    margin: 16px;
-}
-
-@media (min-width: 840px) {
-    .list-card {
-        width: calc(100vw - 48px - 64px - 112px);
-        margin: 16px auto 0;
-    }
-    .list-card .mat-card-content {
-        min-height: 400px;
-    }
-}
-
-@media (min-width: 1024px) {
-    .list-card {
-        width: calc(100vw - 48px - 64px - 112px - 256px);
-        max-width: calc(1360px - 48px - 64px - 112px - 256px);
-    }
-}
-
-.search-form {
-    background: #fff;
-    padding: 0 16px;
-    z-index: 1;
-    position: relative;
-}
-
-@media (min-width: 840px) {
-    .search-form {
-        margin: 8px 16px 0;
-    }
-}
-
-.search-form mat-form-field {
-    width: 100%;
-}
-
-.search-form .search-icon {
-    width: 1.5em;
-    top: 7px;
-    position: relative;
-    color: rgba(0, 0, 0, 0.5);
-}
-
 .item-list {
     margin-top: 0;
     padding-top: 0;
@@ -51,6 +6,9 @@
 
 .item-list mat-list-item {
     background: #fff;
+    width: 25%;
+    display: inline-block;
+    text-align: center;
 }
 
 @media (min-width: 840px) {
@@ -63,13 +21,13 @@
 virtual-scroll {
     display: block;
     width: 100%;
-    height: calc(100vh - 128px - 38px - 45vh);
+    height: calc(100vh - 112px - 45vh);
 }
 
 mat-progress-spinner {
     position: absolute;
     z-index: 1;
-    top: calc(50% - 25px);
+    top: calc(50% - 25px + 22.5vh);
     left: calc(50% - 25px);
 }
 
