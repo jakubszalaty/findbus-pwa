@@ -2,7 +2,10 @@
 
 ## Description
 
-GraphQL Proxy for Zditm API with Angular 5 PWA.
+GraphQL Proxy for [Zditm API](https://www.zditm.szczecin.pl/) with Angular 5 PWA.
+
+It bases on data from ZDITM and shows position of buses which have GPS.
+Important! Some older buses haven't buildin GPS, so app won't show their positions.
 
 [Online version](https://findbus.webjs.eu)
 
@@ -26,8 +29,11 @@ TODO
 
 ## Links
 
-- https://github.com/nestjs/nest
-- https://github.com/apollographql/apollo-server
+- [Nest.js](https://github.com/nestjs/nest)
+- [Apollo Server](https://github.com/apollographql/apollo-server)
+- [Angular](https://angular.io/)
+- [Apollo Client](https://github.com/apollographql/apollo-client)
+
 
 ## License
 
