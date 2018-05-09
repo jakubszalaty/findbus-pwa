@@ -1,35 +1,28 @@
-# zditm-graphql
+# Find Bus
 
 ## Description
 
-GraphQL Proxy for Zditm API.
+GraphQL Proxy for Zditm API with Angular 5 PWA.
 
-[Online version](https://zditm-graphql.webjs.eu)
+[Online version](https://findbus.webjs.eu)
 
+## Screenshoots
 
-## Installation
+### Mobile
 
-```bash
-yarn install
-# or
-npm install
-```
+![](.README/2018-05-09-12-44-39.png)
+![](.README/2018-05-09-12-45-16.png)
+![](.README/2018-05-09-12-46-02.png)
 
-## Start
+### Desktop
+![](.README/2018-05-09-12-43-28.png)
+![](.README/2018-05-09-12-47-16.png)
+![](.README/2018-05-09-12-48-01.png)
 
-```bash
-yarn start
-# or
-npm run start
-```
+## Development
 
-Open url: http://localhost:9000/graphiql
+TODO
 
-![](.README/2018-02-17-15-39-30.png)
-
-## Environments
-
-Environments are located in file `.env`.
 
 ## Links
 
@@ -38,4 +31,4 @@ Environments are located in file `.env`.
 
 ## License
 
-Zditm-graphql is [MIT licensed](LICENSE).
+Find bus is [MIT licensed](LICENSE).
