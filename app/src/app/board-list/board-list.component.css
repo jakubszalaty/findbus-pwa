@@ -45,6 +45,12 @@ virtual-scroll {
     height: calc(100vh - 128px - 38px);
 }
 
+@media (min-width: 1024px) {
+    virtual-scroll {
+        height: calc(100vh - 128px - 16px);
+    }
+}
+
 mat-progress-spinner {
     position: absolute;
     z-index: 1;
