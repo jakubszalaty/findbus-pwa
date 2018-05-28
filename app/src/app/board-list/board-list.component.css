@@ -23,18 +23,10 @@
 }
 
 .item-list {
-    background: #fff;
+    /* background: #fff; */
     margin-top: 0;
     padding-top: 0;
     position: relative;
-}
-
-.item-list mat-list-item {
-    background: #fff;
-}
-
-.list-title:first-child {
-    margin-top: 0;
 }
 
 @media (min-width: 840px) {
@@ -44,15 +36,30 @@
     }
 }
 
+.other-list {
+    margin-bottom: 8px;
+}
+
+.item-list mat-list-item {
+    background: #fff;
+}
+
+.list-title:first-child {
+    margin-top: 0;
+    background: #fff;
+}
+
 virtual-scroll {
     display: block;
     width: 100%;
-    height: calc(100vh - 56px - 48px);
+    height: calc(100vh - 56px - 48px - 56px);
+    margin-bottom: 56px;
 }
 
 @media (min-width: 1024px) {
     virtual-scroll {
-        height: calc(100vh - 64px - 48px - 8px);
+        height: calc(100vh - 64px - 48px - 8px - 8px);
+        margin-bottom: 0;
     }
 }
 

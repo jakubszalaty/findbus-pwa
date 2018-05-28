@@ -14,7 +14,7 @@
     </div>
 
 
-    <mat-list class="item-list" *ngIf="recentlyUsed && recentlyUsed.length">
+    <mat-list class="item-list recently-list" *ngIf="recentlyUsed && recentlyUsed.length && !searchForm.value.searchText">
         <h3 matSubheader class="list-title">Recently used</h3>
         <mat-divider></mat-divider>
         <mat-list-item *ngFor="let stop of recentlyUsed | stopsFilter:listFilter" (click)="goToStop(stop)" attr.aria-label="Go to {{stop.name}} board view">
@@ -25,7 +25,7 @@
         </mat-list-item>
     </mat-list>
 
-    <mat-list class="item-list">
+    <mat-list class="item-list other-list">
         <h3 matSubheader class="list-title" *ngIf="recentlyUsed && recentlyUsed.length">Others</h3>
         <mat-divider></mat-divider>
         <virtual-scroll [items]="stopsList | stopsFilter:listFilter" (update)="viewPortItems = $event">
