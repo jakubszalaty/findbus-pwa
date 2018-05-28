@@ -14,12 +14,24 @@
     </div>
 
 
+    <mat-list class="item-list" *ngIf="recentlyUsed && recentlyUsed.length">
+        <h3 matSubheader class="list-title">Recently used</h3>
+        <mat-divider></mat-divider>
+        <mat-list-item *ngFor="let stop of recentlyUsed | stopsFilter:listFilter" (click)="goToStop(stop)" attr.aria-label="Go to {{stop.name}} board view">
+            <p matLine>{{stop.name}}</p>
+            <a mat-icon-button>
+                <mat-icon>navigate_next</mat-icon>
+            </a>
+        </mat-list-item>
+    </mat-list>
+
     <mat-list class="item-list">
+        <h3 matSubheader class="list-title" *ngIf="recentlyUsed && recentlyUsed.length">Others</h3>
+        <mat-divider></mat-divider>
         <virtual-scroll [items]="stopsList | stopsFilter:listFilter" (update)="viewPortItems = $event">
-            <mat-list-item *ngFor="let stop of viewPortItems">
-                <mat-divider></mat-divider>
+            <mat-list-item *ngFor="let stop of viewPortItems" (click)="goToStop(stop)" attr.aria-label="Go to {{stop.name}} board view">
                 <p matLine>{{stop.name}}</p>
-                <a mat-icon-button [routerLink]="['/','stop', stop.groupId]" attr.aria-label="Go to {{stop.name}} board view">
+                <a mat-icon-button>
                     <mat-icon>navigate_next</mat-icon>
                 </a>
             </mat-list-item>

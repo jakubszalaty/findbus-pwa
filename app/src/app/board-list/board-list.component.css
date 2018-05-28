@@ -23,6 +23,7 @@
 }
 
 .item-list {
+    background: #fff;
     margin-top: 0;
     padding-top: 0;
     position: relative;
@@ -30,6 +31,10 @@
 
 .item-list mat-list-item {
     background: #fff;
+}
+
+.list-title:first-child {
+    margin-top: 0;
 }
 
 @media (min-width: 840px) {
@@ -42,12 +47,12 @@
 virtual-scroll {
     display: block;
     width: 100%;
-    height: calc(100vh - 128px - 38px);
+    height: calc(100vh - 56px - 48px);
 }
 
 @media (min-width: 1024px) {
     virtual-scroll {
-        height: calc(100vh - 128px - 16px);
+        height: calc(100vh - 64px - 48px - 8px);
     }
 }
 

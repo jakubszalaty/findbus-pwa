@@ -39,6 +39,8 @@ import {
     MatStepperModule,
 } from '@angular/material'
 
+import { LocalStorageModule } from '@ngx-pwa/local-storage'
+
 import { ClipboardModule } from 'ngx-clipboard'
 
 import { AgmCoreModule } from '@agm/core'
@@ -84,7 +86,6 @@ import { VehiclesListComponent } from './vehicles-list/vehicles-list.component'
         AppRoutingModule,
         // connection
         GraphQLModule,
-        // MaterialDesign
         BrowserAnimationsModule,
         // Virtual scroll
         VirtualScrollModule,
@@ -92,6 +93,8 @@ import { VehiclesListComponent } from './vehicles-list/vehicles-list.component'
         AgmCoreModule.forRoot({
             apiKey: environment.googleMapsApiKey,
         }),
+        LocalStorageModule,
+        // MaterialDesign
         MatAutocompleteModule,
         MatButtonModule,
         MatButtonToggleModule,

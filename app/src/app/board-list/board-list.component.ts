@@ -14,6 +14,8 @@ import 'rxjs/add/operator/debounce'
 import { fadeInAnimation } from '../animations/fade-in.animation'
 import { HeaderService } from '../header/header.service'
 import { Subscription } from 'apollo-client/util/Observable'
+import { LocalStorage } from '@ngx-pwa/local-storage'
+import { Router } from '@angular/router'
 
 @Component({
     selector: 'app-board-list',
@@ -24,12 +26,20 @@ import { Subscription } from 'apollo-client/util/Observable'
 export class BoardListComponent implements OnInit, OnDestroy {
     loading = true
     stopsList: Stop[]
+    recentlyUsed: Stop[]
     searchForm: FormGroup
     listFilter: string
     viewPortItems: Stop[]
     subscriptions: Subscription[] = []
+    recentlyUsedIds: number[]
 
-    constructor(private apollo: Apollo, fb: FormBuilder, private headerService: HeaderService) {
+    constructor(
+        fb: FormBuilder,
+        private apollo: Apollo,
+        private headerService: HeaderService,
+        private localStorage: LocalStorage,
+        private router: Router
+    ) {
         this.searchForm = fb.group({
             searchText: '',
         })
@@ -46,6 +56,14 @@ export class BoardListComponent implements OnInit, OnDestroy {
         const querySubscription = stopsQuery.subscribe((response) => {
             this.loading = false
             this.stopsList = R.pipe(R.uniqBy(R.prop('name')), R.sortBy(R.prop('name')))(response.data.stops)
+
+            this.localStorage.getItem<number[]>('recentlyUsedIds').subscribe((recentlyUsedIds) => {
+                if (!recentlyUsedIds) {
+                    return
+                }
+                this.recentlyUsedIds = recentlyUsedIds
+                this.recentlyUsed = this.getLastSelectedStops(this.stopsList)(recentlyUsedIds)
+            })
         })
 
         const searchSubscription = this.searchForm.valueChanges
@@ -68,5 +86,16 @@ export class BoardListComponent implements OnInit, OnDestroy {
     clearSearchText() {
         this.searchForm.setValue({ searchText: '' })
         this.listFilter = ''
+    }
+
+    getLastSelectedStops(stopsList) {
+        return R.map((v) => R.find(R.propEq('groupId', v), stopsList))
+    }
+    goToStop(stop: Stop) {
+        const recentlyUsedIds = R.pipe(R.prepend(stop.groupId), R.uniq, R.take(5))(this.recentlyUsedIds)
+
+        this.localStorage.setItem('recentlyUsedIds', recentlyUsedIds).subscribe(() => {
+            this.router.navigate(['/', 'stop', stop.groupId])
+        })
     }
 }
