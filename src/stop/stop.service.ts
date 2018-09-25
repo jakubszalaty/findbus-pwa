@@ -20,10 +20,19 @@ export class StopService {
 
         const convertId = R.converge(R.assoc, [
             R.always('columnId'),
-            R.pipe(R.prop('columnId'), (v) => Number(v)),
+            R.pipe(
+                R.prop('columnId'),
+                (v) => Number(v)
+            ),
             R.identity,
         ])
-        const normalizeKeys = R.map(R.pipe(R.values, R.zipObj(keys), convertId))
+        const normalizeKeys = R.map(
+            R.pipe(
+                R.values,
+                R.zipObj(keys),
+                convertId
+            )
+        )
         const whereEq = R.converge(R.eqProps, [R.keys, R.identity]) as any
 
         const filterKey = R.keys(where).length ? whereEq(where) : R.always(true)
@@ -34,7 +43,10 @@ export class StopService {
 
         const stopRaw = (await fs.readJSON('./misc/stops.json')) as StopRaw[]
 
-        const resolveData = R.pipe<StopRaw[], Stop[], Stop[]>(normalizeKeys, R.filter(filterKey))
+        const resolveData = R.pipe<StopRaw[], Stop[], Stop[]>(
+            normalizeKeys,
+            R.filter(filterKey)
+        )
 
         return resolveData(stopRaw)
     }
@@ -43,37 +55,48 @@ export class StopService {
         try {
             const html = await fetch(
                 `https://www.zditm.szczecin.pl/json/tablica.inc.php?slupek=${groupId}${columnId}`
-            ).then((v) => v.text())
+            ).then(async (data) => {
+                try {
+                    const json = await data.json()
+                    return json.tresc
+                } catch (error) {
+                    return await data.text()
+                }
+            })
+
             const dom = new JSDOM(html) as any
             const isError = !!dom.window.document.querySelector('tbody tr td.gmvblad')
             if (isError) {
                 return null
             }
-
-            const parseReciveData = R.map(
-                R.pipe(
-                    (v: any) => ({
-                        line: v.children[0].textContent,
-                        direction: v.children[1].textContent,
-                        arrival: v.children[2].textContent,
-                    }),
-                    R.converge(R.merge, [
-                        R.identity,
-                        R.pipe(R.prop('arrival'), (v) => {
-                            const onStop = !!v.match('>>>')
-                            const isApprox = !!v.match('za')
-                            return {
-                                arrival: v.replace('za', '').trim(),
-                                onStop,
-                                isApprox,
-                            }
-                        }),
-                    ])
-                )
-            )
-            return parseReciveData([...dom.window.document.querySelectorAll('tbody tr')])
+            // debugger
+            return this.parseReciveData([...dom.window.document.querySelectorAll('tbody tr')])
         } catch (error) {
             return error
         }
     }
+    private parseReciveData = R.map(
+        R.pipe(
+            (v: any) => ({
+                line: v.children[0].textContent,
+                direction: v.children[1].textContent,
+                arrival: v.children[2].textContent,
+            }),
+            R.converge(R.merge, [
+                R.identity,
+                R.pipe(
+                    R.prop('arrival'),
+                    (v) => {
+                        const onStop = !!v.match('>>>')
+                        const isApprox = !!v.match('za')
+                        return {
+                            arrival: v.replace('za', '').trim(),
+                            onStop,
+                            isApprox,
+                        }
+                    }
+                ),
+            ])
+        )
+    )
 }
