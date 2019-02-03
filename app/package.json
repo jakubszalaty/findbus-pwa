@@ -3,7 +3,6 @@
     "version": "0.0.1",
     "license": "MIT",
     "scripts": {
-        "prestart": "yarn install",
         "ng": "ng",
         "start": "ng serve --host 0.0.0.0 --disable-host-check",
         "prebuild": "envsubst < ./src/environments/environment.prod.ts-temp > ./src/environments/environment.prod.ts",
@@ -13,7 +12,7 @@
         "e2e": "ng e2e",
         "shell": "docker exec -it $(docker ps --format \"{{.Names}}\" | grep angular) sh",
         "attach": "docker attach $(docker ps --format \"{{.Names}}\" | grep angular)",
-        "browser": "google-chrome --ignore-certificate-errors"
+        "browser": "google-chrome --ignore-certificate-errors --new-window"
     },
     "private": true,
     "dependencies": {
@@ -51,7 +50,7 @@
         "zone.js": "^0.8.19"
     },
     "devDependencies": {
-        "@angular/cli": "^1.6.8",
+        "@angular/cli": "^7.0.4",
         "@angular/compiler-cli": "^5.2.0",
         "@angular/language-service": "^5.2.0",
         "@types/jasmine": "~2.8.3",
