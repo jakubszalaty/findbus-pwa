@@ -10,7 +10,7 @@ async function bootstrap() {
 
     // Setup cors
     const corsOptions = {
-        origin: /(.*\.webjs.eu|.*\.test)/,
+        origin: /(.*\.webjs.pl|.*\.test)/,
         credentials: true,
     }
 

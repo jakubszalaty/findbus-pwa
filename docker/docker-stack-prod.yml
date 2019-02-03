@@ -6,7 +6,7 @@ services:
             NODE_ENV: prod
             PORT: 9000
             SUBSCRIPTION_PORT: 9001
-            SUBSCRIPTION_ENDPOINT: "wss://ws-zditm-graphql.webjs.eu/subscriptions"
+            SUBSCRIPTION_ENDPOINT: "wss://ws-zditm-graphql.webjs.pl/subscriptions"
         deploy:
             labels:
                 - 'traefik.backend.loadbalancer.sticky=true'

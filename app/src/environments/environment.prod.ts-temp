@@ -1,7 +1,7 @@
 export const environment = {
     production: true,
-    serverUri: 'https://zditm-graphql.webjs.eu',
-    serverApiUri: 'https://zditm-graphql.webjs.eu/graphql',
-    serverApiWebsocketUri: 'wss://ws-zditm-graphql.webjs.eu/subscriptions',
+    serverUri: 'https://zditm-graphql.webjs.pl',
+    serverApiUri: 'https://zditm-graphql.webjs.pl/graphql',
+    serverApiWebsocketUri: 'wss://ws-zditm-graphql.webjs.pl/subscriptions',
     googleMapsApiKey: '${GOOGLE_MAPS_API_KEY}'
 }
