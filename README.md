@@ -7,7 +7,7 @@ GraphQL Proxy for [Zditm API](https://www.zditm.szczecin.pl/) with Angular 5 PWA
 It bases on data from ZDITM and shows position of buses which have GPS.
 Important! Some older buses haven't buildin GPS, so app won't show their positions.
 
-[Online version](https://findbus.webjs.eu)
+[Online version](https://findbus.webjs.pl)
 
 ## Screenshoots
 
