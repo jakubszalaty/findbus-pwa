@@ -1,14 +1,19 @@
 #!/bin/zsh
+# Usage
+# ./docker/docker-stack-deploy-prod [login] [url]
+# Important: You need to have setup access to host via ssh
+# e.g
+# `./docker/docker-stack-deploy-prod ubuntu 77.123.11.41`
+# or
+# `./docker/docker-stack-deploy-prod user my-domain.com`
+
 DIRNAME=$(dirname $0)
 ABS_PATH=$(realpath $DIRNAME)
-HOST="ubuntu@$1"
-PROD_DIR=/home/ubuntu/zditm-graphql
-# source $ABS_PATH/env && \
-# docker stack deploy --with-registry-auth -c $ABS_PATH/docker-stack-prod.yml zditm-graphql
+HOST="$1@$2"
+PROD_DIR="/home/$1/zditm-graphql"
 
 cd $(dirname $ABS_PATH) && \
 rsync -avze ssh --delete \
     --exclude 'node_modules' --exclude '.git' --exclude 'dist' --exclude 'app' . $HOST:$PROD_DIR && \
 rsync -avze ssh --delete ./app/dist $HOST:$PROD_DIR/app && \
 ssh $HOST "docker build -t zditm-graphql:prod $PROD_DIR -f $PROD_DIR/docker/Dockerfile && docker build -t zditm-graphql-client:prod $PROD_DIR/ -f $PROD_DIR/docker/Dockerfile-client && docker stack rm zditm-graphql && docker stack deploy --with-registry-auth -c $PROD_DIR/docker/docker-stack-prod.yml zditm-graphql"
-# ssh $HOST "docker build -t zditm-graphql:prod $PROD_DIR -f $PROD_DIR/docker/Dockerfile && docker stack rm zditm-graphql && docker stack deploy --with-registry-auth -c $PROD_DIR/docker/docker-stack-prod.yml zditm-graphql"
